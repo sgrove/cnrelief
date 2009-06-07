@@ -1,0 +1,12 @@
+%h1="#{current_user.email}'s profile"
+
+- form_for(@user) do |f|
+  = f.error_messages
+  = f.label :full_name, "My full name is"
+  = f.text_field :full_name
+  = f.submit 'Update'
+
+= link_to 'Show', @user
+- if @initial_run
+  |
+  = link_to "Nah, I'll do it later", new_campaign_path

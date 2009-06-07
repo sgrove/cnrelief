@@ -1,25 +1,70 @@
-# SQLite version 3.x
-#   gem install sqlite3-ruby (not necessary on OS X Leopard)
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+ #Sqlite Settings
+  #adapter: sqlite3
+  #database: abtacular_dev
+  #pool: 5
+  #timeout: 5000
+
+  # Postgresql Settings
+  adapter: postgresql
+  database: abtacular_dev
   pool: 5
   timeout: 5000
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
-test: &TEST
+  # Mysql Settings
+  # adapter: mysql
+  # encoding: utf8
+  # database: bort_development
+  # username: root
+  # password:
+  # pool: 5
+  
+test: &test
+  # Sqlite Settings
   adapter: sqlite3
-  database: db/test.sqlite3
+  database: db/abtacular_test
   pool: 5
   timeout: 5000
 
+  # Mysql Settings
+  # adapter: mysql
+  # encoding: utf8
+  # database: bort_test
+  # username: root
+  # password:
+  # pool: 5
+  
+staging:
+  # Postgres Settings
+  adapter: postgresql
+  database: abtacular_staging
+  username: libai
+  pool: 5
+  timeout: 5000
+
+  # Mysql Settings
+  # adapter: mysql
+  # encoding: utf8
+  # database: bort_staging
+  # username: root
+  # password:
+  # pool: 5
+  
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  # Postgres Settings
+  adapter: postgresql
+  database: abtacular_production
+  username: libai
   pool: 5
   timeout: 5000
+
+  # Mysql Settings
+  # adapter: mysql
+  # encoding: utf8
+  # database: bort_production
+  # username: root
+  # password:
+  # pool: 5
 
 cucumber:
-  <<: *TEST
+  <<: *test

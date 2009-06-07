@@ -10,8 +10,15 @@ module NavigationHelpers
     
     when /the homepage/
       '/'
+    when /the new worker page/
+      '/'
+      #new_worker_path
+
     when /the new user page/
       new_user_path
+
+    when /the dashboard page/
+      dashboard_path
 
     
     # Add more mappings here.
