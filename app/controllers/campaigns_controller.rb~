@@ -1,0 +1,14 @@
+class CampaignsController < ApplicationController
+  before_filter :get_user
+  
+  def index
+    @campaigns = @user.campaigns
+  end
+
+  protected
+
+  def get_user
+    redirect_to root_path unless current_user
+    @user = current_user
+  end
+end

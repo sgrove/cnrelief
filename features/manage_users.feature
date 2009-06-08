@@ -34,10 +34,10 @@ Feature: Manage users
     When I go to the dashboard page
     And I follow "My profile"
     Then I should see "My full name is"
-    When I fill in "name" with "Sir ClickClickGood"
-    And I fill in "zip" with "94720"
-    And I fill in "city" with "Berkeley"
-    And I fill in "address" with "2219 Piedmont Ave."
-    And I follow "update"
-    Then I should see "Glad to get to know you better, Sir ClickClickGood!"
+    When I fill in "user_full_name" with "Sir ClickClickGood"
+    And I fill in "user_zip" with "94720"
+    And I fill in "user_city" with "Berkeley"
+    And I fill in "user_address1" with "2219 Piedmont Ave."
+    And I press "update"
+    Then I should see "Updated your profile"
 

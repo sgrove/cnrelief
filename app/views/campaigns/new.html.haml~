@@ -1,0 +1,25 @@
+%h2 New Campaign
+
+
+- form_for( @campaign ) do |f|
+  = f.error_messages
+  %p
+    = f.label :title
+    = f.text_field :title
+
+  %p
+    = f.label :copy1
+    = f.text_field :copy1
+
+  %p
+    = f.label :copy2
+    = f.text_field :copy2
+
+  %p
+    = f.label :size, "Campaign size"
+    = f.select_tag :size, options_for_select([["small", "Small(~50 repsonses)"], ["medium", "Medium(~200 responses)"], ["large", "Large (>500 responses"]
+
+  %p
+    = f.submit 'Let me in!'
+
+= link_to "Back to dashboard", dashboard_path

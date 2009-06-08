@@ -143,8 +143,7 @@ def create_user(options={})
   options[:email] ||= "test_user@abtacular.com"
   options[:password] ||= "s3cr3t"
   
-  @user = User.create( :email => options[:email], :email => options[:email], :password => options[:password])
-
+  @user = User.create(:email => options[:email], :password => options[:password], :password_confirmation => options[:password], :full_name => "Clickclick Good")
 end
   
 def login_user(options={})
@@ -155,6 +154,6 @@ def login_user(options={})
     create_user :email => options[:email]
     @me = @user
   end
-  post "/user_sessions", :email => @me.email, :password => @me.password
+  post "/user_sessions", :user_session => { :email => @me.email, :password => @me.password }
   #follow_redirect!
 end

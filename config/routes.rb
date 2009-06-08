@@ -1,11 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
   map.login "/login", :controller => 'user_sessions', :action => "new"
   map.logout "/logout", :controller => 'user_sessions', :action => "destroy"
-  map.dashboard "/dashboard", :controller => 'users', :action => "index"
-  map.new_campaign "/campaigns/new", :controller => 'users', :action => "new"
+  map.dashboard "/dashboard", :controller => 'campaigns', :action => "index"
+  map.schedule_campaign "/campaigns/schedule/:id", :controller => "campaigns", :action => "schedule"
   
   map.resources :user_sessions
   map.resources :users
+  map.resources :campaigns
 
   # The priority is based upon order of creation: first created -> highest priority.
 

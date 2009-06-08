@@ -9,7 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 30) do
+ActiveRecord::Schema.define(:version => 50) do
+
+  create_table "campaigns", :force => true do |t|
+    t.string   "title"
+    t.string   "copy1"
+    t.string   "copy2"
+    t.string   "size"
+    t.string   "status"
+    t.string   "campaign_type"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -60,6 +72,11 @@ ActiveRecord::Schema.define(:version => 30) do
     t.string   "last_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "zip"
+    t.string   "state"
   end
 
 end

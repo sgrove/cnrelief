@@ -6,7 +6,7 @@ require 'cucumber/formatter/unicode' # Comment out this line if you don't want C
 
 # Added by Sean
 require 'ruby-debug'
-reqiure 'cucumber_rails_debus/steps'
+require 'cucumber_rails_debug/steps'
 Cucumber::Rails.use_transactional_fixtures
 Cucumber::Rails.bypass_rescue # Comment out this line if you want Rails own error handling 
                               # (e.g. rescue_action_in_public / rescue_responses / rescue_from)
