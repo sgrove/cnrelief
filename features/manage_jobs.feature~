@@ -1,14 +1,20 @@
-Feature: Manage users
+Feature: Manage jobs
   In order to [goal]
   [stakeholder]
   wants [behaviour]
   
-  Scenario: Register new user
+  Scenario: Register new estimate for a new company
     Given a company named "PuroPrinters"
-    Given I am on the new user page
-    When I fill in "Email" with "user@puroprinters.com"
-    And I fill in "Password" with "super_s3cr3t"
-    And I fill in "Password Confirmation" with "super_s3cr3t"
+    Given that I am logged in as estimater "joe@pjprinters.com"
+    When I go to the jobs page
+    And I follow "New Estimate"
+    And I check "New company"
+    And I fill in "company_name" with "MiloStudy"
+    And I fill in "company_address_1" with "2219 Piedmont Ave."
+    And I fill in "company_city" with "Berkeley"
+    And I select "California" from "company_state"
+    And I fill in "company_zip" with "94720"
+
     And I check "I read these terms of service, and I agree to all of them!"
     And I press "I'm ready to join!"
     Then I should see "Welcome to PrintWorks! Why not fill in your profile to get started?"

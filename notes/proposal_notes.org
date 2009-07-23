@@ -1,0 +1,11 @@
+* Proposal Suggestions
+** A/B Testing
+*** Layout the forms differently for randomly-selected users. Compare relative speeds via statistical analysis of A/B data
+** Invest now to be well positioned in the future
+*** Not too many competitors in the initial price range
+*** Find an immediate partner to do testing with (set a hard deadline in the goals layout)
+** Suggest forcing incremental changes - combine programming/networking/sysadmin expertise to reduce overall TCO
+*** Web interface lends itself to easing upgrades
+
+
+

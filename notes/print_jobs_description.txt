@@ -1,0 +1,22 @@
+Job Orders
+|- Meta-data - Can be duplicated
+| |- Original Quote information
+|   |- Contact information, Discount, etc.
+|   |- Original Estimator, etc.
+|   |- Dates
+|
+|- Order information
+| |- Current Estimator, CSR
+| |- Quantity
+| |- Dates
+|
+|- Shipping Information
+| |- Shipping types
+| |- Costs
+| |- Notes
+|
+|- Prepress Information
+| |- Art information (type of file supplied, proof info, etc.)
+|
+|- Section Details
+  |- Information surrounding Page descriptions

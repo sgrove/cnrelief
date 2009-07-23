@@ -9,16 +9,219 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 50) do
+ActiveRecord::Schema.define(:version => 250) do
 
-  create_table "campaigns", :force => true do |t|
-    t.string   "title"
-    t.string   "copy1"
-    t.string   "copy2"
-    t.string   "size"
-    t.string   "status"
-    t.string   "campaign_type"
+  create_table "addresses", :force => true do |t|
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.string   "name"
+    t.string   "email"
+    t.string   "attention"
+    t.string   "ship_to"
+    t.string   "street_1"
+    t.string   "street_2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "clients", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.string   "ship_from"
+    t.string   "quickbooks_name"
+    t.text     "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "companies", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contacts", :force => true do |t|
+    t.string   "name"
+    t.string   "first"
+    t.string   "middle"
+    t.string   "last"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "contactable_id"
+    t.string   "contactable_type"
+  end
+
+  create_table "employee_groups", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "employees", :force => true do |t|
+    t.string   "username"
+    t.integer  "employee_group_id"
+    t.integer  "company_id"
+    t.string   "permissions"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "jobs", :force => true do |t|
+    t.integer  "client_id"
+    t.integer  "number"
+    t.datetime "entered"
+    t.datetime "ordered"
+    t.integer  "estimator_id"
+    t.integer  "quoter_id"
+    t.integer  "csr_id"
+    t.integer  "contact_id"
+    t.integer  "overs_on_shelf"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "notes", :force => true do |t|
+    t.string   "name"
+    t.text     "body"
+    t.integer  "notable_id"
+    t.string   "notable_type"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "orders", :force => true do |t|
+    t.integer  "entry_id"
+    t.integer  "estimator_id"
+    t.integer  "csr_id"
+    t.integer  "job_id"
+    t.integer  "biller_id"
+    t.integer  "contact_id"
+    t.boolean  "billing_on_hold"
+    t.string   "type"
+    t.string   "po"
+    t.string   "turnaround"
+    t.text     "description"
+    t.integer  "final_quantity"
+    t.integer  "quantity_ordered"
+    t.integer  "quanitity_overs"
+    t.integer  "overs_on_shelf"
+    t.integer  "quote_number"
+    t.string   "form_number"
+    t.integer  "consecutive_start"
+    t.integer  "consecutive_end"
+    t.integer  "number_of_parts"
+    t.string   "proof"
+    t.string   "finish_flat_size"
+    t.string   "finish_fold_size"
+    t.datetime "ordered_on"
+    t.datetime "due_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "paper_stocks", :force => true do |t|
+    t.string   "vendor"
+    t.integer  "product_id"
+    t.string   "category"
+    t.string   "category_2"
+    t.string   "parent_sheet"
+    t.integer  "base_count"
+    t.integer  "weight"
+    t.string   "color"
+    t.string   "finish"
+    t.float    "retail_cost"
+    t.float    "company_cost"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "phone_numbers", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "phoneable_id"
+    t.string   "phoneable_type"
+    t.string   "name"
+    t.string   "number"
+    t.integer  "extension"
+  end
+
+  create_table "press_costs", :force => true do |t|
+    t.integer  "press_id"
+    t.string   "name"
+    t.float    "cost"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "press_schedules", :force => true do |t|
+    t.integer  "section_id"
+    t.integer  "priority"
+    t.datetime "scheduled"
+    t.datetime "started"
+    t.datetime "completed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "presses", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "presses"
+    t.string   "name"
+    t.integer  "washup_initial_minutes"
+    t.integer  "washup_additional_minutes"
+    t.integer  "plate_intitial_minutes"
+    t.integer  "plate_additional_minutes"
+    t.integer  "die_cut_minutes"
+    t.integer  "kiss_cut_minutes"
+    t.integer  "foil_minutes"
+    t.integer  "emboss_minutes"
+    t.integer  "normal_run_rate"
+    t.integer  "minimum_run_rate"
+    t.integer  "make_ready_sheets"
+    t.float    "discount_percentage"
+    t.float    "discount_hours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "quantities", :force => true do |t|
+    t.integer  "order_id"
+    t.integer  "amount"
+    t.float    "markup"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sections", :force => true do |t|
+    t.integer  "order_id"
+    t.string   "status"
+    t.string   "name"
+    t.string   "description"
+    t.string   "alternate_name"
+    t.boolean  "include_section_on_quote"
+    t.boolean  "current_order"
+    t.string   "ink_coverage"
+    t.boolean  "bleeds"
+    t.integer  "ink_side_1"
+    t.string   "ink_side_1_colors"
+    t.integer  "ink_side_2"
+    t.string   "ink_side_2_colors"
+    t.integer  "paper_stock_id"
+    t.text     "stock_description"
+    t.boolean  "customer_supplied_stock"
+    t.integer  "press_id"
+    t.string   "parent_size"
+    t.string   "press_size"
+    t.integer  "out"
+    t.integer  "signature"
+    t.integer  "pages"
+    t.string   "layout"
+    t.float    "stock_sell_percent"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,15 +271,8 @@ ActiveRecord::Schema.define(:version => 50) do
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
-    t.string   "first_name"
-    t.string   "last_name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "address1"
-    t.string   "address2"
-    t.string   "city"
-    t.string   "zip"
-    t.string   "state"
   end
 
 end

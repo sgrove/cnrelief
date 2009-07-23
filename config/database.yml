@@ -7,7 +7,7 @@ development:
 
   # Postgresql Settings
   adapter: postgresql
-  database: abtacular_dev
+  database: printworks_dev
   pool: 5
   timeout: 5000
 
@@ -22,7 +22,7 @@ development:
 test: &test
   # Sqlite Settings
   adapter: sqlite3
-  database: db/abtacular_test
+  database: db/printworks_test
   pool: 5
   timeout: 5000
 
@@ -37,7 +37,7 @@ test: &test
 staging:
   # Postgres Settings
   adapter: postgresql
-  database: abtacular_staging
+  database: printworks_staging
   username: libai
   pool: 5
   timeout: 5000
@@ -53,7 +53,7 @@ staging:
 production:
   # Postgres Settings
   adapter: postgresql
-  database: abtacular_production
+  database: printworks_production
   username: libai
   pool: 5
   timeout: 5000
