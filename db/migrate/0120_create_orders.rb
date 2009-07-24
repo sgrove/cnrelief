@@ -30,6 +30,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string :finish_flat_size
       t.string :finish_fold_size
 
+      t.datetime :quoted_on
       t.datetime :ordered_on
       t.datetime :due_by
       

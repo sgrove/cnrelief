@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  has_many :campaigns
   default_scope :order => "created_at ASC"
   
   acts_as_authentic do |c|
@@ -8,8 +7,7 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    return nil if self.first_name.nil? or self.last_name.nil?
-    return "#{self.first_name} #{self.last_name}"
+    self.login
   end
 
   def full_name=(name)

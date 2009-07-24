@@ -1,5 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-
   map.resources :paper_stocks
   map.resources :presses
   map.resources :sections
@@ -11,7 +10,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.login "/login", :controller => 'user_sessions', :action => "new"
   map.logout "/logout", :controller => 'user_sessions', :action => "destroy"
-  map.dashboard "/dashboard", :controller => 'campaigns', :action => "index"
   
   map.resources :user_sessions
   map.resources :users

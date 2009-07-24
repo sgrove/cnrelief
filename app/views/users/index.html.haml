@@ -3,7 +3,7 @@
 #user_listing
   - @users.each do |user|
     .users
-      %span= "#{user.email}"
+      %span= "#{user.login}"
       = link_to 'Show', user
       = link_to 'Edit', edit_user_path(user)
       = link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete

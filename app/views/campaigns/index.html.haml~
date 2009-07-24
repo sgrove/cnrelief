@@ -1,4 +1,0 @@
-%ul.campaign_nav
-  %li= link_to "New campaign"
-
-%h2 Your campaigns
