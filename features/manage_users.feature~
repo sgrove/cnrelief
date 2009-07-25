@@ -1,0 +1,41 @@
+Feature: Manage users
+  In order to [goal]
+  [stakeholder]
+  wants [behaviour]
+  
+  Scenario: Register new campaigner
+    Given I am on the new user page
+    When I fill in "Email" with "iluvabs@abtacular.com"
+    And I check "I read these terms of service, and I agree to all of them!"
+    And I press "Let me in!"
+    Then I should see "Welcome to ABTacular! Why not fill in your profile to get started?"
+    And I should see "My full name is"
+    When I follow "Nah, I'll do it later"
+    Then I should see "Let's create a new campaign"
+
+  Scenario: Delete user
+    Given the following users:
+      |email|
+      |iluvabs@abtacular.com|
+      |abrocks@abtacular.com|
+      |itroll@abtacular.com|
+      |clickclickgood@abtacular.com|
+    When I delete the 3rd user
+    Then I should see the following users:
+      |email|
+      |iluvabs@abtacular.com|
+      |abrocks@abtacular.com|
+      |clickclickgood@abtacular.com|
+
+  Scenario: Fill in profile data
+    Given I am logged in as "ccg@abtacular.com"
+    When I go to the dashboard page
+    And I follow "My profile"
+    Then I should see "My full name is"
+    When I fill in "name" with "Sir ClickClickGood"
+    And I fill in "zip" with "94720"
+    And I fill in "city" with "Berkeley"
+    And I fill in "address" with "2219 Piedmont Ave."
+    And I click "update"
+    Then I should see "Glad to get to know you better, Sir ClickClickGood!"
+

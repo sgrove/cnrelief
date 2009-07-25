@@ -1,0 +1,22 @@
+
+%h2="Company info for #{@company}"
+
+%h3 Employees
+
+- for employee in @company.employees
+  %div="#{employee}"
+
+%h3 Clients
+
+- for client in @company.clients
+  %div="#{link_to client, company_client_path(@company, client)}"
+
+%h3 Jobs
+
+- for job in @company.jobs
+  %div="#{job}"
+
+%h3 Orders
+
+- for order in @company.orders
+  %div="#{order}"

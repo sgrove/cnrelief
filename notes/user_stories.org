@@ -1,0 +1,32 @@
+* Stories
+** Story 1: Wedding
+A couple is getting married. They call PuroPrinters for their stationary needs. They order invitation cards, envelopes, placement cards, thank you cards, and a booklet. Larry, a customer service representative, takes their order. He 
+** Story 2: Stationary Paper
+(Please send in screenshots of the final quote with all the fields filled in for this story)
+
+MiloStudy.com needs 3x5in notepads they will use as advertisement for their new website. They call PuroPrinters and speak with CSR Larry who guides them through the process. They request quotes for a 50 page 3-color notepads in quantities of 1000, 2000, 5000, and 10,000 pieces. They are not in a hurry, having planned the need out, and are willing to wait for etended periods if that results in a lower price.
+
+After asking Yan from MiloStudy.com how she plans on giving PuroPrinters the art, he selects "Cusrtomer supplied Digital File".
+
+They do not know what paper stock they will need, and ask Larry to decide for them. Larry thanks the customer and promises to call back shortly with the quote.
+
+Larry sets shipping to "F.O.B. PJ Printers", and ignores the shipping costs for now, though he does indicate that it should show on the customer's quote.
+
+Larry creates a new section for the order to define the details. He titles the section "notepad", but customizes it on the customer quote as "MiloStudy Notepad". Coerage is light, and there are no bleeds for the design. Side one has 3 colors (3 PMS's), and side two is blank with no colors.
+
+He chooses [SPICER PAPERS INC.][WHITE][80LBS] paper stock, and enters "White 80lbs stock" for Milostudy. He decides to run it on the [6C KOMORI].
+
+The [PARENT SIZE] is 25x35, and the [PRESS SHEET SIZE] is 25x19, so they can run 2UP. Therefore, even though the quantity ordered is 1000, the quantity required for that is 0.5M. And because there are no bleeds or special bindery options for this notepad, Larry does not allow any additional sheets.
+
+(Please describe the cost setting portion here. I've included a start to give an example, but I'm pretty sure this isn't quite right)
+
+Larry estimates the cost for Comp time @ 15.00, and 15.00 for the design. The proof will be done on the Epson blueline, and he estimates it at 25.00
+
+...etc...
+
+Therefore  the final costs come to [SOME AMOUNT]
+
+(You can actually just include screenshots of the actual quote for this story if you don't want to transcribe it. I'll take care of that part)
+
+
+
