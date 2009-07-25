@@ -157,3 +157,22 @@ def login_user(options={})
   post "/user_sessions", :user_session => { :email => @me.email, :password => @me.password }
   #follow_redirect!
 end
+
+# cnrelief added steps below
+
+# Randomize the fields based company_name + field hashed? Keep in mind
+When /^I submit a valid company named "([^\"]*)"$/ do |name|
+  fill_in("company_name", :with => "MiloStudy")
+  fill_in("company_address_1", :with => "2219 Piedmont Ave.")
+  fill_in("company_city", :with => "Berkeley")
+  select( "California", :from => "company_state")
+  fill_in "company_zip", :with => "94720"
+
+  fill_in "company_contact_name", :with => "Milo Ceville"
+  fill_in "company_contact_phone", :with => "949-555-1210"
+  fill_in "company_contact_cell", :with => "949-555-1211"
+  fill_in "company_contact_fax", :with => "949-555-1212"
+  fill_in "company_contact_email", :with => "mceville@milostudy.com"
+
+  follow "create"
+end

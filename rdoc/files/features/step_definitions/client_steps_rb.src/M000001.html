@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>set_employee_group (features/step_definitions/client_steps.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File features/step_definitions/client_steps.rb, line 24</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set_employee_group</span>(<span class="ruby-identifier">login</span>, <span class="ruby-identifier">group</span>)
+  <span class="ruby-identifier">e</span> = <span class="ruby-constant">Employee</span>.<span class="ruby-identifier">find_by_login</span>( <span class="ruby-identifier">login</span> )
+  <span class="ruby-identifier">e</span>.<span class="ruby-identifier">employee_group</span> = <span class="ruby-identifier">group</span>
+  <span class="ruby-identifier">e</span>.<span class="ruby-identifier">save</span>
+<span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

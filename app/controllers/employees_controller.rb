@@ -33,6 +33,7 @@ class EmployeesController < ApplicationController
         format.html { render :action => "edit" }
         format.xml  { render :xml => @employee.errors, :status => :unprocessable_entity }
       end
+    end
   end
 
   def edit
@@ -79,5 +80,4 @@ class EmployeesController < ApplicationController
   def has_permission_to_destroy
     flash[:warnings] = "Sorry, you don't have permission to do that." and redirect_to :back unless current_user.has_permission_to "destroy_employee"
   end
-  
 end
