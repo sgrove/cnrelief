@@ -57,7 +57,7 @@ class ClientsController < ApplicationController
 
   def destroy
     @company.clients.find(params[:id]).destroy
-    redirect_to :action => "index"
+    redirect_to company_clients_path( @company )
   end
 
   protected
