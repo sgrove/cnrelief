@@ -1,6 +1,0 @@
-Printworks
-* Customers
-** Jobs
-*** Orders
-**** Sections
-***** Pages

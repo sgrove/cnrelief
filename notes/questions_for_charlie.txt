@@ -1,6 +1,0 @@
-* Questions
-** Why are there finish_flat_size and finish_fold_size for both orders AND sections? Shouldn't it be in one or the other?
-**
-** Shipping is per-order, through has_many relationship
-* Notes
-** Markup is applied *on orders*, per quantity. There is an additional overall markup percentage that can be applied in addition

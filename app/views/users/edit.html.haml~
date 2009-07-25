@@ -1,9 +1,0 @@
-%h1="#{current_user.email}'s profile"
-
-- form_for(@user) do |f|
-  = f.error_messages
-  = f.submit 'Update'
-
-= link_to 'Show', @user
-|
-= link_to 'Back', users_path
