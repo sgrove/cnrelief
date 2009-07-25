@@ -1,0 +1,25 @@
+
+.page_title {
+  font-size: 200%;
+  margin-bottom: 1em;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #999999; }
+
+#list_title {
+  margin-bottom: 2px;
+  font-weight: bold;
+  font-size: 125%; }
+
+#db-list li {
+  font-size: 120%;
+  padding-top: 5px;
+  list-style: none; }
+
+#footer {
+  border-top-width: 1px;
+  border-top-color: solid;
+  border-top-color: #999999;
+  margin-top: 3em;
+  margin-bottom: 1em;
+  padding-top: 5px; }
