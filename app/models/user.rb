@@ -14,7 +14,5 @@ class User < ActiveRecord::Base
 
   def full_name=(name)
     name = name.split(" ")
-    self.first_name = name.first
-    self.last_name = name.last
   end
 end

@@ -66,7 +66,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
 
-    # Is this the user's first time updating their profile? If so, let's direct them to the campaign creation page
+    # Is this the user's first time updating their profile? If so, let's direct them to the employee management page
     # Tried checking if new by created_at == updated_at, but current_user under authlogic updates the entry :P
     # Bastard. So now we have a lame check that if the name was empty, we assume it's their first run
     logger.info("User.full_name: #{@user.full_name}, param: #{params[:user][:full_name]}")
@@ -74,14 +74,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        flash[:notice] = 'Updated your profile - believe me, it looks great.'
+        flash[:notice] = 'Updated your profile.'
 
         format.html {
           logger.info("Initial run? #{initial_run}")
-          redirect_to dashboard_path and return unless initial_run
-
-          logger.info("Initial run, redirecting to new campaign path")
-          redirect_to new_campaign_path, :params => { :initial_run => true}
+          redirect_to dashboard_path and return
         }
         format.xml  { head :ok }
       else
