@@ -28,12 +28,28 @@ class UsersController < ApplicationController
   def new
     @user = User.new
 
-    # TODO: Move to campaigns#new
-    flash[:notice] = "Let's create a new campaign"
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @user }
+    end
+  end
+
+  # POST /users
+  # POST /users.xml
+  def create
+    @user = User.new(params[:user])
+
+    respond_to do |format|
+      if @user.save
+        flash[:notice] = 'Welcome to cnrelief! Why not fill in your profile to get started?'
+        add_lockdown_session_values
+
+        format.html { redirect_to edit_user_path( :current ) }
+        format.xml  { render :xml => @user, :status => :created, :location => @user }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
@@ -44,22 +60,6 @@ class UsersController < ApplicationController
     @initial_run = true if @user.full_name.nil? # Is this too hackish? I don't want to add another useless field to the database
   end
 
-  # POST /users
-  # POST /users.xml
-  def create
-    @user = User.new(params[:user])
-
-    respond_to do |format|
-      if @user.save
-        flash[:notice] = 'Welcome to ABTacular! Why not fill in your profile to get started?'
-        format.html { redirect_to edit_user_path( :current ) }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
 
   # PUT /users/1
   # PUT /users/1.xml

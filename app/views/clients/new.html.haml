@@ -1,0 +1,11 @@
+%h2="Adding a client for #{@company}"
+
+
+- form_for [@company, @client] do |f|
+  =f.hidden_field :company_id
+
+  =f.label :name
+  =f.text_field :name
+
+=link_to "cancel", company_clients_path(@company)
+

@@ -1,0 +1,6 @@
+%h2="Listing clients for #{@company} (#{@company.clients.count})"
+
+=link_to "New Client", new_company_client_path( @company )
+
+- for client in @clients
+  .client="#{link_to client, company_client_path( @company, client) }"

@@ -1,6 +1,8 @@
 class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
+      t.references :company
+
       t.string    :login                 # optional, you can use email instead, or both
       t.string    :email,               :null => false                # optional, you can use login instead, or both
       t.string    :crypted_password,    :null => false                # optional, see below
@@ -17,9 +19,30 @@ class CreateUsers < ActiveRecord::Migration
       t.datetime  :last_login_at                                      # optional, see Authlogic::Session::MagicColumns
       t.string    :current_login_ip                                   # optional, see Authlogic::Session::MagicColumns
       t.string    :last_login_ip                                      # optional, see Authlogic::Session::MagicColumns
-      
+
       t.timestamps
     end
+
+    #
+    # Add indexes
+    #
+    add_index :users, :perishable_token
+    add_index :users, :email    
+    #
+    # Create your initial user.  
+    # Will make this an administrator user later.
+    #
+    usr = User.create \
+              :login => 'sgrove',
+              :email => 'sgrove@cnrelief.com',
+              :password => 'khorma',
+              :password_confirmation => 'khorma'
+
+    usr = User.create \
+              :login => 'axavier',
+              :email => 'axavier@cnrelief.com',
+              :password => 'khorma',
+              :password_confirmation => 'khorma'
   end
 
   def self.down

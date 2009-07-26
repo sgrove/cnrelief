@@ -4,8 +4,8 @@ class Company < ActiveRecord::Base
   has_many :contacts, :through => :clients
   has_many :phone_numbers, :as => :phoneable
   has_many :addresses, :as => :addressable
-  has_many :employees
-  has_many :presses, :class_name => "Press"
+  has_many :employees, :class_name => "User"
+  has_many :presses
 
   def to_s
     self.name
