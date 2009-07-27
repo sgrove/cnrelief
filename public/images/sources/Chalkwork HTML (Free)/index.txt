@@ -1,0 +1,73 @@
+
+----------------------------------------------
+CHALKWORK HTML (Free Version)
+by Dave Shea
+mezzoblue.com/icons/chalkwork/html
+----------------------------------------------
+Hi there, and thanks for your interest in Chalkwork HTML, a member of the Chalkwork Family.
+
+Please consider subscribing to the Chalkwork news feed, which will announce new releases in the family as well as inform existing customers of updates if any occur. As I don't keep customer contact information, this will be the only way to find out if the set you bought is revised at any point in the future.
+
+mezzoblue.com/icons/chalkwork/news.xml
+
+- Dave Shea
+
+
+----------------------------------------------
+LICENSE AGREEMENT
+----------------------------------------------
+When you downloaded this set, you agreed to the Chalkwork license, located at http://www.mezzoblue.com/icons/license/
+
+
+----------------------------------------------
+ICON FOLDER INDEX
+----------------------------------------------
+The icon files are broken down by file format. Due to some formats resulting in higher quality results, those are considered the preferred files and are located in the folder titled 'High Quality'. This package should contain the following folders in this hierarchy:
+
+High Quality
+    ICNS (Mac)
+    ICO (Windows)
+    PNG
+    TIF
+Lower Quality
+    BMP
+    GIF
+
+Within each of the second-level folders, you'll find 31 further folders, one for each icon. Depending on the file format, you may find multiple sizes within these folders along with any icon variations that may exist. Please note that ICO and ICNS files contain all applicable sizes within a single file, and that ICNS files do not support the 24x24 icon size.
+
+
+----------------------------------------------
+CHALKWORK HTML (Free Version) ICON INDEX
+---------------------------------------------------------------------
+
+Anchor
+Blockquote
+Comment
+Form
+Form Input (Button Cancel)
+Form Input (Button OK)
+Form Input (Checkbox)
+Form Input (Password)
+Form Input (Radio)
+Form Input (Select Multiple)
+Form Input (Select Single)
+Form Input (Text)
+Form Input (Textarea)
+H1
+H2
+H3
+H4
+H5
+H6
+IFrame
+Label
+Link (Break)
+Link (Make)
+List (Definition)
+List (Ordered Decimal)
+List (Ordered Roman)
+List (Unordered)
+Meta
+Paragraph
+Quote
+View Source

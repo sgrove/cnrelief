@@ -1,0 +1,7 @@
+log/*.log
+notes/*
+tmp/**/*
+doc/api
+doc/app
+doc/plugins
+*.*~
