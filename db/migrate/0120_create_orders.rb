@@ -14,6 +14,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string :po
       t.string :turnaround
       t.text :description
+      t.string :status
 
       t.integer :final_quantity
       t.integer :quantity_ordered

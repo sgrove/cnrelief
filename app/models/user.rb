@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   belongs_to :company
-  has_and_belongs_to_many :user_groups
+  belongs_to :user_group
   has_many :contacts, :as => :contactable
   has_many :addresses, :through => :contacts
   has_many :phone_numbers, :through => :contacts
@@ -38,6 +38,16 @@ class User < ActiveRecord::Base
   end
 
   def primary_contact
-    self.contacts.primary
+    c = self.contacts.primary.first
+    return c unless c.nil?
+    return self.contacts.primary.new
+  end
+
+  def has_permission_to?(action)
+    self.permissions.split(',').include?(action)
+  end
+
+  def permissions
+    self.group.permissions
   end
 end

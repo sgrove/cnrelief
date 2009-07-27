@@ -115,15 +115,15 @@ Then /^I should be on (.+)$/ do |page_name|
 end
 
 
-# abtacular additions
-Given 'that I am not logged in' do
+# cnrelief additions
+Given 'I am not logged in' do
 end
 
-Given 'that I am logged in' do
-  login_user :email => "test_user@abtacular.com"
+Given 'I am logged in' do
+  login_user :email => "test_user@cnrelief.com"
 end
   
-Given /^that I am logged in as "(.*)"$/ do |email|
+Given /^I am logged in as "(.*)"$/ do |email|
   login_user :email => email
 end
 
@@ -140,20 +140,21 @@ Then 'the response should be 404' do
 end
 
 def create_user(options={})
-  options[:email] ||= "test_user@abtacular.com"
+  options[:email] ||= "test_user@cnrelief.com"
   options[:password] ||= "s3cr3t"
   
-  @user = User.create(:email => options[:email], :password => options[:password], :password_confirmation => options[:password], :full_name => "Clickclick Good")
+  @user = User.create(:email => options[:email], :password => options[:password], :password_confirmation => options[:password], :full_name => "Printprint Good")
 end
   
 def login_user(options={})
-  options[:email] ||= "test_user@abtacular.com"
+  options[:email] ||= "test_user@cnrelief.com"
   options[:password] ||= "s3cr3t"
 
   unless @me
     create_user :email => options[:email]
     @me = @user
   end
+
   post "/user_sessions", :user_session => { :email => @me.email, :password => @me.password }
   #follow_redirect!
 end

@@ -5,7 +5,8 @@ Feature: Manage clients
 
   Scenario: Create a new client via the estimates page
     Given a company named "PuroPrinters"
-      And I am logged in as estimator "joe@puroprinters.com"
+      And I am logged in as "joe@puroprinters.com"
+      And I am a member of the estimator group
       And I belong to the employee group "csr"
 
     When I submit a valid company named "MiloStudy"

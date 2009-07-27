@@ -2,6 +2,7 @@ class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
       t.references :company
+      t.references :user_group
 
       t.string    :login                 # optional, you can use email instead, or both
       t.string    :email,               :null => false                # optional, you can use login instead, or both
