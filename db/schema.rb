@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 250) do
+ActiveRecord::Schema.define(:version => 270) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -54,20 +54,6 @@ ActiveRecord::Schema.define(:version => 250) do
     t.datetime "updated_at"
     t.integer  "contactable_id"
     t.string   "contactable_type"
-  end
-
-  create_table "employee_groups", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "employees", :force => true do |t|
-    t.string   "username"
-    t.integer  "employee_group_id"
-    t.integer  "company_id"
-    t.string   "permissions"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "jobs", :force => true do |t|
@@ -118,6 +104,7 @@ ActiveRecord::Schema.define(:version => 250) do
     t.string   "proof"
     t.string   "finish_flat_size"
     t.string   "finish_fold_size"
+    t.datetime "quoted_on"
     t.datetime "ordered_on"
     t.datetime "due_by"
     t.datetime "created_at"
@@ -138,6 +125,17 @@ ActiveRecord::Schema.define(:version => 250) do
     t.float    "company_cost"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "permissions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "permissions_user_groups", :id => false, :force => true do |t|
+    t.integer "permission_id"
+    t.integer "user_group_id"
   end
 
   create_table "phone_numbers", :force => true do |t|
@@ -256,7 +254,21 @@ ActiveRecord::Schema.define(:version => 250) do
   add_index "tags", ["name"], :name => "index_tags_on_name"
   add_index "tags", ["taggings_count"], :name => "index_tags_on_taggings_count"
 
+  create_table "user_groups", :force => true do |t|
+    t.string   "name"
+    t.string   "permissions"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_groups_users", :id => false, :force => true do |t|
+    t.integer "user_group_id"
+    t.integer "user_id"
+  end
+
   create_table "users", :force => true do |t|
+    t.integer  "company_id"
     t.string   "login"
     t.string   "email",                              :null => false
     t.string   "crypted_password",                   :null => false
@@ -274,5 +286,8 @@ ActiveRecord::Schema.define(:version => 250) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["perishable_token"], :name => "index_users_on_perishable_token"
 
 end
