@@ -1,25 +1,61 @@
-
+.container { background: #ffffff; }
+.container a {
+  color: #0066cc;
+  background: #ffffff;
+}
+.container a:hover {
+  color: #0066cc;
+  background: #ffffff;
+}
+#user_nav {
+  padding: 4px;
+  width: 100%;
+  background: #333333;
+  color: #666666;
+}
+#user_nav a {
+  color: #eeeeee;
+  text-decoration: none;
+}
 .page_title {
   font-size: 200%;
   margin-bottom: 1em;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: #999999; }
-
+  border-bottom: 1px solid #999999;
+}
 #list_title {
   margin-bottom: 2px;
   font-weight: bold;
-  font-size: 125%; }
-
+  font-size: 125%;
+}
 #db-list li {
   font-size: 120%;
   padding-top: 5px;
-  list-style: none; }
-
+  list-style: none;
+}
+#form-para {
+  padding-top: 20px;
+  margin-bottom: 5px;
+}
+#subform-title {
+  border-bottom: 1px solid #999999;
+  font-weight: bold;
+  font-size: 125%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  color: #999999;
+  background: #dddddd;
+}
+#submit-button {
+  text-align: center;
+  margin-top: 1em;
+}
+#submit-button input[type="submit"] {
+  font-size: 125%;
+  font-weight: bold;
+}
 #footer {
-  border-top-width: 1px;
-  border-top-color: solid;
-  border-top-color: #999999;
+  border-top: 1px solid #999999;
   margin-top: 3em;
   margin-bottom: 1em;
-  padding-top: 5px; }
+  padding-top: 5px;
+}
