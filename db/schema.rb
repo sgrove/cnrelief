@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(:version => 270) do
     t.string   "po"
     t.string   "turnaround"
     t.text     "description"
+    t.string   "status"
     t.integer  "final_quantity"
     t.integer  "quantity_ordered"
     t.integer  "quanitity_overs"
