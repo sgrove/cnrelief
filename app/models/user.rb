@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
   belongs_to :company
   belongs_to :user_group
-  has_many :contacts, :as => :contactable
-  has_many :addresses, :through => :contacts
+
+  has_one :contact, :as => :contactable
+  has_one :address, :as => :addressable
   has_many :phone_numbers, :through => :contacts
 
   default_scope :order => "created_at ASC"
@@ -12,35 +13,41 @@ class User < ActiveRecord::Base
     c.login_field = :email
   end
 
+  # Sets the user's address from a hash. Bit of a hack for nested resources
+  def set_address=(hash)
+    a = Address.new(hash)
+    a.addressable = self
+    a.save
+  end
+
+  # Returns address as a hash. HACK!
+  def set_address
+    self.address.apples
+  end
+
   def deliver_password_reset_instructions!
     reset_perishable_token!
     Notifier.deliver_password_reset_instruction(self)
   end
 
   def full_name
-    c = self.primary_contact
-    return "#{c.first} #{c.last}" unless c.nil? or c.count == 0
+    c = self.primary_contact.full_name
+    return c unless c.nil? or c == ""
     self.login
   end
 
   def full_name=(name)
-    name = name.split(" ")
-    c = self.primary_contact
-    c.first = name[0]
-    c.last = name[1]
-    c.save
+    self.primary_contact.full_name = name
   end
 
   def to_s
-    contact = self.contacts.primary.first
-    return contact.full_name unless contact.nil?
+    contact = self.contact
+    return contact.full_name unless contact.nil? 
     self.login
   end
 
   def primary_contact
-    c = self.contacts.primary.first
-    return c unless c.nil?
-    return self.contacts.primary.new
+    c = self.contact
   end
 
   def has_permission_to?(action)

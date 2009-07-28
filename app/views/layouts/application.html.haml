@@ -28,9 +28,9 @@
         |
         =link_to "Presses", presses_path
         |
-        =link_to "Clients", companies_path
+        =link_to "Clients", company_clients_path( current_user.company )
         |
-        =link_to "Orders", orders_path
+        =link_to "Orders", new_order_path
         |
         =link_to "PaperStocks", paper_stocks_path
         |

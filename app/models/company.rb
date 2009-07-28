@@ -22,18 +22,19 @@ class Company < ActiveRecord::Base
 
   # group_name should not include the company prefix
   def add_employee_to_group(employee_id, group_name)
-    g = self.groups.find("#{self.name}_#{group_name}")
+    g = self.user_groups.find_by_name("#{self.name}_#{group_name}")
     
 
     e = self.employees.find(employee_id)
+    puts "Adding #{e} to #{g}"
     return false if g.nil? or e.nil?
 
-    u.user_group = g
-    return u.save
+    e.user_group = g
+    return e.save
   end
 
   # Just an alias for Company.user_groups
-  def create_default_groups
+  def create_default_groups!
     # Define groups and their permissions
     groups = []
 
@@ -67,6 +68,6 @@ class Company < ActiveRecord::Base
   def save
     new = self.new_record?
     super
-    create_default_groups if new
+    create_default_groups! if new
   end
 end

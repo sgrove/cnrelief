@@ -57,7 +57,7 @@ class UsersController < ApplicationController
   def edit
     @user = current_user
     @initial_run = false
-    @initial_run = true if @user.full_name.nil? # Is this too hackish? I don't want to add another useless field to the database
+    @initial_run = true if @user.primary_contact.new_record? # Is this too hackish? I don't want to add another useless field to the database
   end
 
 
@@ -66,9 +66,6 @@ class UsersController < ApplicationController
   def update
     @user = current_user
 
-    # Is this the user's first time updating their profile? If so, let's direct them to the employee management page
-    # Tried checking if new by created_at == updated_at, but current_user under authlogic updates the entry :P
-    # Bastard. So now we have a lame check that if the name was empty, we assume it's their first run
     logger.info("User.full_name: #{@user.full_name}, param: #{params[:user][:full_name]}")
     initial_run = true if @user.full_name.nil? and params[:user][:full_name] != nil
 

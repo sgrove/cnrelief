@@ -37,7 +37,8 @@ class CreateUsers < ActiveRecord::Migration
               :login => 'sgrove',
               :email => 'sgrove@cnrelief.com',
               :password => 'khorma',
-              :password_confirmation => 'khorma'
+              :password_confirmation => 'khorma',
+              :company_id => 1
 
     usr = User.create \
               :login => 'axavier',

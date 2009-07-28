@@ -270,6 +270,7 @@ ActiveRecord::Schema.define(:version => 270) do
 
   create_table "users", :force => true do |t|
     t.integer  "company_id"
+    t.integer  "user_group_id"
     t.string   "login"
     t.string   "email",                              :null => false
     t.string   "crypted_password",                   :null => false

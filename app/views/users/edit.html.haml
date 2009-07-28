@@ -1,23 +1,27 @@
 %h1="#{current_user.email}'s profile"
 
+="#{@user.full_name}"
+="#{@user.address.full_address.gsub(/\n/, "<br />") unless @user.address.nil?}"
+
 - form_for(@user) do |f|
   = f.error_messages
   = f.label :full_name, "My full name is"
   = f.text_field :full_name
 
-  - unless @initial_run
-    %p
-      = f.label :address1, "Address 1"
-      = f.text_field :address1
-    %p
-      = f.label :address2, "Address 2"
-      = f.text_field :address2
-    %p
-      = f.label :city
-      = f.text_field :city
-    %p
-      = f.label :zip
-      = f.text_field :zip
+  - unless @user.new_record?
+    - f.fields_for :set_address do |address_form|
+      %p
+        = address_form.label :street1, "Street 1"
+        = address_form.text_field :street_1
+      %p
+        = address_form.label :street2, "Street 2"
+        = address_form.text_field :street_2
+      %p
+        = address_form.label :city
+        = address_form.text_field :city
+      %p
+        = address_form.label :zip
+        = address_form.text_field :zip
 
   = f.submit 'Update'
 
