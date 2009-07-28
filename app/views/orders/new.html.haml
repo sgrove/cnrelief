@@ -1,97 +1,78 @@
 -content_for :header do
   =javascript_include_tag 'new_edit_order'
+  =stylesheet_link_tag 'new_edit_order'
 
 .page_title
   New Quote/Order
 
 .span-24
   -form_for @order do |f|
+    #tabs
+      %ul
+        %li
+          %a{:href=>"#tabs-1"}
+            Order Info
+        %li
+          %a{:href=>"#tabs-2"}
+            Quote Details
+        %li
+          %a{:href=>"#tabs-3"}
+            Sections
+      #tabs-1
+        .span-18
+          #form-para
+            .span-6
+              =label :order, :quoted_on, "Date Quoted"
+              %br
+              =f.text_field :quoted_on
 
-    .span-24
-      #form-para
-        .span-8
-          =label :order, :quoted_on, "Date Quoted"
-          %br
-          =f.text_field :quoted_on
+            .span-6
+              =label :order, :ordered_on, "Date Ordered"
+              %br
+              =f.text_field :ordered_on
 
-        .span-8
-          =label :order, :ordered_on, "Date Ordered"
-          %br
-          =f.text_field :ordered_on
+            %div{:class=>"span-6 last"}
+              =label :order, :due_by, "Due by"
+              %br
+              =f.text_field :due_by
 
-        %div{:class=>"span-8 last"}
-          =label :order, :due_by, "Due by"
-          %br
-          =f.text_field :due_by
+        .span-18
+          #form-para
+            .span-6
+              =label :order, :csr_id, "CSR: "
+              .csr_id_field
+                None
+              %a{:href=>"#", :id=>"csr_dialog_link", :class=>"ui-state-default selectstuff"}
+                Select CSR
+              =f.hidden_field :csr_id
 
-    .span-24
-      #form-para
-        .span-8
-          =label :order, :csr_id, "CSR: "
-          .csr_id_field
-            None
-          %a{:href=>"Select CSR"}
-            Select CSR
-          =f.hidden_field :csr_id
+            .span-6
+              =label :order, :estimator_id, "Estimator: "
+              .estimator_id_field
+                None
+              %a{:href=>"#", :id=>"estimator_dialog_link", :class=>"ui-state-default selectstuff"}
+                Select Estimator
+              =f.hidden_field :estimator_id
 
-        .span-8
-          =label :order, :estimator_id, "Estimator: "
-          .estimator_id_field
-            None
-          %a{:href=>"Select Estimator"}
-            Select Estimator
-          =f.hidden_field :estimator_id
-
-        %div{:class=>"span-8 last"}
-          =label :order, :status, "Order Status: "
-          %br
-          =f.select (:status, ["quoted", "ordered"])
+            %div{:class=>"span-6 last"}
+              =label :order, :status, "Order Status: "
+              %br
+              =f.select (:status, ["quoted", "ordered"])
 
 
 
-    .span-24
-      #subform-title
-        Print Details
+      #tabs-2
+        %h2
+          Content heading 2
+        %p
+          Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.
+      #tabs-3
+        %h2
+          Content heading 3
+        %p
+          Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.
 
-      #form-para
-        .span-10
-          =label :order, :proof, "Proof file"
-          %br
-          =f.file_field :proof
-
-        .span-7
-          =label :order, :finish_flat_size, "Finish Flat Size"
-          %br
-          =f.text_field :finish_flat_size
-        %div{:class=>"span-7 last"}
-          =label :order, :finish_fold_size, "Finish Fold Size"
-          %br
-          =f.text_field :finish_fold_size
-
-    .span-24
-      #form-para
-        .span-10
-          =label :order, :description, "Description"
-          %br
-          =f.text_area :description, :size=>"50x6"
-        %div{:class=>"span-14 last"}
-          .span-7
-            =label :order, :quantity_ordered, "Quantity Ordered"
-            %br
-            =f.text_field :quantity_ordered
-          %div{:class=>"span-7 last"}
-            =label :order, :overs_on_shelf, "Overs on Shelf"
-            %br
-            =f.text_field :overs_on_shelf
-          .span-7
-            =label :order, :consecutive_start, "Consecutive Start"
-            %br
-            =f.text_field :consecutive_start
-          %div{:class=>"span-7  last"}
-            =label :order, :consecutive_end, "Consecutive End"
-            %br
-            =f.text_field :consecutive_end
-    .span-24
-      #form-para
-        %p{:id=>"submit-button"}
-          =f.submit ("Create Quote/Order")
+#csr_dialog
+  Select CSR here
+#estimator_dialog
+  Select Estimator here

@@ -1,4 +1,5 @@
 .container { background: #ffffff; }
+.container input[type="text"] { width: 170px; }
 .container a {
   color: #0066cc;
   background: #ffffff;

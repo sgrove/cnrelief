@@ -58,14 +58,7 @@ ActiveRecord::Schema.define(:version => 270) do
 
   create_table "jobs", :force => true do |t|
     t.integer  "client_id"
-    t.integer  "number"
-    t.datetime "entered"
-    t.datetime "ordered"
-    t.integer  "estimator_id"
-    t.integer  "quoter_id"
-    t.integer  "csr_id"
-    t.integer  "contact_id"
-    t.integer  "overs_on_shelf"
+    t.string   "number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -257,15 +250,10 @@ ActiveRecord::Schema.define(:version => 270) do
 
   create_table "user_groups", :force => true do |t|
     t.string   "name"
-    t.string   "permissions"
+    t.text     "permissions"
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "user_groups_users", :id => false, :force => true do |t|
-    t.integer "user_group_id"
-    t.integer "user_id"
   end
 
   create_table "users", :force => true do |t|
