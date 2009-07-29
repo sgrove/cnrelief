@@ -1,0 +1,15 @@
+<form action="/orders/test" method="post">
+<% token_tag %>
+
+<input type="text" name="person[pets][][name]" value="angie"/>
+<input type="text" name="person[pets][][type]" value="cat"/>
+
+<input type="text" name="person[pets][][name]" value="yellow"/>
+<input type="text" name="person[pets][][type]" value="dog"/>
+
+<input type="text" name="person[pets][][name]" value="spark"/>
+<input type="text" name="person[pets][][type]" value="dog"/>
+
+<input type="submit"/>
+</form>
+

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 270) do
+ActiveRecord::Schema.define(:version => 280) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -54,6 +54,17 @@ ActiveRecord::Schema.define(:version => 270) do
     t.datetime "updated_at"
     t.integer  "contactable_id"
     t.string   "contactable_type"
+  end
+
+  create_table "costs", :force => true do |t|
+    t.integer  "costable_id"
+    t.string   "costable_type"
+    t.string   "category"
+    t.string   "name"
+    t.boolean  "variable_on_quantity"
+    t.float    "cost"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "jobs", :force => true do |t|
@@ -195,8 +206,7 @@ ActiveRecord::Schema.define(:version => 270) do
     t.string   "name"
     t.string   "description"
     t.string   "alternate_name"
-    t.boolean  "include_section_on_quote"
-    t.boolean  "current_order"
+    t.boolean  "include_on_quote"
     t.string   "ink_coverage"
     t.boolean  "bleeds"
     t.integer  "ink_side_1"
@@ -207,8 +217,9 @@ ActiveRecord::Schema.define(:version => 270) do
     t.text     "stock_description"
     t.boolean  "customer_supplied_stock"
     t.integer  "press_id"
-    t.string   "parent_size"
     t.string   "press_size"
+    t.string   "finish_flat_size"
+    t.string   "finish_fold_size"
     t.integer  "out"
     t.integer  "signature"
     t.integer  "pages"

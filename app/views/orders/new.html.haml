@@ -14,7 +14,7 @@
             Order Info
         %li
           %a{:href=>"#tabs-2"}
-            Quote Details
+            Quote & Print Details
         %li
           %a{:href=>"#tabs-3"}
             Sections
@@ -42,7 +42,7 @@
               =label :order, :csr_id, "CSR: "
               .csr_id_field
                 None
-              %a{:href=>"#", :id=>"csr_dialog_link", :class=>"ui-state-default selectstuff"}
+              %a{:id=>"csr_dialog_link", :class=>"ui-state-default selectstuff"}
                 Select CSR
               =f.hidden_field :csr_id
 
@@ -50,7 +50,7 @@
               =label :order, :estimator_id, "Estimator: "
               .estimator_id_field
                 None
-              %a{:href=>"#", :id=>"estimator_dialog_link", :class=>"ui-state-default selectstuff"}
+              %a{:id=>"estimator_dialog_link", :class=>"ui-state-default selectstuff"}
                 Select Estimator
               =f.hidden_field :estimator_id
 
@@ -62,10 +62,39 @@
 
 
       #tabs-2
-        %h2
-          Content heading 2
-        %p
-          Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.
+        #form-para
+          .span-18
+            #subform-ttl
+              Sizes
+          .span-6
+            =label :order, :finish_flat_size, "Finish Flat Size"
+            %br
+            =f.text_field :finish_flat_size
+          %div{:class=>"span-6 last"}
+            =label :order, :finish_fold_size, "Finish Fold Size"
+            %br
+            =f.text_field :finish_fold_size
+        #form-para
+          .span-18
+            #subform-title
+              Quantities
+            %a{:id=>"add_quantity_dialog_link", :class=>"ui-state-default selectstuff"}
+              Add New Quantity
+            %input{:type=>"hidden", :id=>"quantity_set", :value=>"0"}
+            #quantity_list
+            %br
+            .span-18
+              %div{:class=>"span-2", :id=>"fieldt-c"}
+                &nbsp;
+              %div{:class=>"span-3", :id=>"fieldt"}
+                Quantity
+              %div{:class=>"span-3", :id=>"fieldt"}
+                Markup
+              %div{:class=>"span-10 last", :id=>"fieldt"}
+                Note
+            %br
+            #quantity_fields
+
       #tabs-3
         %h2
           Content heading 3
@@ -76,3 +105,24 @@
   Select CSR here
 #estimator_dialog
   Select Estimator here
+#add_quantity_dialog
+  %div{:class=>"span-7 last"}
+    .span-3
+      %label{:for=>"temp_qty_amount"}
+        Quantity:
+    %div{:class=>"span-4 last"}
+      %input{type="text", :id=>"temp_qty_amount"}
+  %div{:class=>"span-7 last"}
+    .span-3
+      %label{:for=>"temp_qty_markup"}
+        Markup (%):
+    %div{:class=>"span-4 last"}
+      %input{type="text", :id=>"temp_qty_markup"}
+  %div{:class=>"span-7 last"}
+    .span-3
+      %label{:for=>"temp_qty_note"}
+        Note:
+    %div{:class=>"span-4 last"}
+      %textarea{:id=>"temp_qty_note"}
+
+#qty_status

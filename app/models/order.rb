@@ -1,13 +1,15 @@
 class Order < ActiveRecord::Base
   belongs_to :job
-  belongs_to :estimator, :class_name => "Employee"
-  belongs_to :csr, :class_name => "Employee"
-  belongs_to :quoter, :class_name => "Employee"
-  belongs_to :biller, :class_name => "Employee"
+  belongs_to :estimator, :class_name => "User"
+  belongs_to :csr, :class_name => "User"
+  belongs_to :quoter, :class_name => "User"
+  belongs_to :biller, :class_name => "User"
   belongs_to :contact
   has_many :sections
   has_many :notes
   has_many :quantities
+
+  accepts_nested_attributes_for :sections, :allow_destroy => true
 
 
   # Plugins - auditing, comments, paperclip for multiple files

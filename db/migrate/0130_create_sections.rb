@@ -7,8 +7,7 @@ class CreateSections < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :alternate_name
-      t.boolean :include_section_on_quote
-      t.boolean :current_order
+      t.boolean :include_on_quote
 
       t.string :ink_coverage
       t.boolean :bleeds
@@ -23,8 +22,9 @@ class CreateSections < ActiveRecord::Migration
 
       t.references :press
 
-      t.string :parent_size
       t.string :press_size
+      t.string :finish_flat_size
+      t.string :finish_fold_size
       t.integer :out
       t.integer :signature
       t.integer :pages
