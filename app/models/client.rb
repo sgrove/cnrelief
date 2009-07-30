@@ -1,4 +1,5 @@
 class Client < ActiveRecord::Base
+  belongs_to :company
   has_many :contacts, :as => :contactable
   has_many :addresses, :as => :addressable
   has_many :jobs

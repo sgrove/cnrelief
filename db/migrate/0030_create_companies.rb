@@ -5,7 +5,13 @@ class CreateCompanies < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    cmp = Company.create \
+    :name => "FreshPrints"
+
   end
+
+  
 
   def self.down
     drop_table :companies

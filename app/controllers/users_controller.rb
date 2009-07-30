@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   layout 'application'
+  before_filter :require_login
+
   
   # GET /users
   # GET /users.xml
@@ -57,7 +59,7 @@ class UsersController < ApplicationController
   def edit
     @user = current_user
     @initial_run = false
-    @initial_run = true if @user.primary_contact.new_record? # Is this too hackish? I don't want to add another useless field to the database
+    @initial_run = true if @user.contact.new_record? # Is this too hackish? I don't want to add another useless field to the database
   end
 
 
@@ -95,5 +97,12 @@ class UsersController < ApplicationController
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
     end
+  end
+
+  protected
+
+  def require_login
+    flash[:warning] = "Sorry, you have to be logged in to do that."
+    redirect_to new_user_session_path unless current_user
   end
 end

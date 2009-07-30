@@ -5,6 +5,6 @@ class UserGroup < ActiveRecord::Base
   validates_presence_of :name
 
   def to_s
-    self.name
+    self.name.split('_')[1].capitalize
   end
 end

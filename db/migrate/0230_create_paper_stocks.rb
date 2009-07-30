@@ -15,6 +15,20 @@ class CreatePaperStocks < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    ps = PaperStock.create \
+    :vendor => "Spicier Papers, Inc.",
+    :product_id => "000001002",
+    :category => "Plain",
+    :category_2 => "Plainer",
+    :parent_sheet => "28x40",
+    :base_count => 1000,
+    :weight => 145,
+    :color => "white",
+    :finish => "matte",
+    :retail_cost => 217.77,
+    :company_cost => 185.10
+    
   end
 
   def self.down

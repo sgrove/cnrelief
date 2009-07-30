@@ -6,6 +6,10 @@ class CreateJobs < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    jb = Job.create \
+    :number => "00-0000-001",
+    :client_id => 1
   end
 
   def self.down

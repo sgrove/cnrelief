@@ -20,11 +20,6 @@ class User < ActiveRecord::Base
     a.save
   end
 
-  # Returns address as a hash. HACK!
-  def set_address
-    self.address.apples
-  end
-
   def deliver_password_reset_instructions!
     reset_perishable_token!
     Notifier.deliver_password_reset_instruction(self)

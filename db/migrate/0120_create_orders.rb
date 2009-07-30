@@ -6,6 +6,7 @@ class CreateOrders < ActiveRecord::Migration
       t.references :csr
       t.references :job
       t.references :biller
+      t.references :cost_set
 
       t.references :contact
 
@@ -37,6 +38,20 @@ class CreateOrders < ActiveRecord::Migration
       
       t.timestamps
     end
+
+    ord = Order.create \
+    :estimator_id => 1,
+    :csr_id => 2,
+    :job_id => 1,
+    :biller_id => 1,
+    :cost_set_id => 1,
+    :quantity_ordered => 1000,
+    :finish_flat_size => "8.5x11",
+    :finish_fold_size => "8.5x11",
+    :quoted_on => 5.days.ago,
+    :ordered_on => 2.days.ago,
+    :due_by => Time.now + 4.days
+    
   end
 
   def self.down

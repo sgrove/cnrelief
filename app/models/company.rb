@@ -7,6 +7,7 @@ class Company < ActiveRecord::Base
   has_many :employees, :class_name => "User"
   has_many :presses
   has_many :user_groups
+  has_many :cost_sets
 
   def to_s
     self.name
