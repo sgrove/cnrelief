@@ -21,6 +21,9 @@ class CreateSections < ActiveRecord::Migration
       t.boolean :customer_supplied_stock
 
       t.references :press
+      t.references :proof_machine
+      t.references :bindery_machine
+      t.references :letterpress_machine
 
       t.string :press_size
       t.string :finish_flat_size
@@ -30,6 +33,11 @@ class CreateSections < ActiveRecord::Migration
       t.integer :pages
       t.string :layout
       t.float :stock_sell_percent
+
+      # JSON encoded values: cost_name: cost_value
+      t.text :prepress_costs
+      t.text :bindery_costs
+      t.text :letterpress_costs
 
       t.integer :quantity_per_order
 
@@ -55,7 +63,8 @@ class CreateSections < ActiveRecord::Migration
     :signatures => 1,
     :pages => 1,
     :layout => "perfect",
-    :quantity_per_order => 2
+    :quantity_per_order => 2,
+    :prepress_costs => "{\"design\":120,\"computer\":30,\"typesetting\":15}"
 
     sct = Section.create \
     :order_id => 1,

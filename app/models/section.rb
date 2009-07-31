@@ -51,15 +51,16 @@ class Section < ActiveRecord::Base
     prices = {}
     #prices["plates"] = color_count * 50 # This is a cheat. Choose a plate machine, then get this price later
 
-    prices["press"] = press.cost(self.order.cost_set, self, order_quantity)
-    prices["comp"] = 60
-
-    #prices["ink"] = 35 * color_count
+    #puts "Checking prepress prices: #{self.order.cost_set.id} #{self.id} nil"
+    prices["prepress"] = prepress.cost(self.order.cost_set_id, self.id, nil)
+    prices["press"] = press.cost(self.order.cost_set, self.id, nil)
     prices["paper"] = self.paper_stock.cost( :out => self.out, :quantity => q_allowed, :adjustment => 0.25 )
 
-    puts "prices: #{prices}"
+    #puts "prices: #{prices}"
+    sum = prices["prepress"] + prices["press"] + prices["paper"] 
+    puts "Total for #{q_ordered}: #{sum.round(2)}"
 
-    sum = prices["press"] + prices["comp"] + prices["paper"]
+
 
     return sum.round(2)
   end
@@ -96,6 +97,12 @@ class Section < ActiveRecord::Base
   end
 
   def quantity_ordered(quantity_ordered)
-    quantity_ordered * self.quantity_per_order
+    puts "Quantity Ordered: #{quantity_ordered} #{self.quantity_per_order}"
+    quantity_ordered.to_i * self.quantity_per_order.to_i
+  end
+
+  # Dummy method for now
+  def prepress
+    self.order.job.client.company.prepress
   end
 end
