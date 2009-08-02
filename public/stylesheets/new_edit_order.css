@@ -1,0 +1,96 @@
+.ui-tabs-vertical { width: 940px; border:none;}
+.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 190px; }
+.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; background:none;}
+.ui-tabs-vertical .ui-tabs-panel { padding: 0em; float: right; width: 710px;}
+
+.ui-tabs-vertical .ui-state-default {background:#d0e5f5; padding: 3px;}
+.ui-tabs-vertical .ui-state-default a{width:80%; background:#d0e5f5; display:block;}
+
+.ui-tabs-vertical .ui-state-hover { background:#d0e5f5; border:none;}
+.ui-tabs-vertical .ui-state-hover a{background:#d0e5f5; display:block;}
+
+.ui-tabs-vertical .ui-state-active{background:#ffffff; border: none;}
+.ui-tabs-vertical .ui-state-active a{background:#ffffff; display:block;}
+
+.ui-tabs-vertical .ui-state-focus{background:#d0e5f5; border:none;}
+.ui-tabs-vertical .ui-state-focus a{background:#d0e5f5; display:block;}
+
+.ui-tabs-vertical .ui-tabs-selected a{background: #ffffff;}
+
+.ui-tabs-vertical .ui-tabs{border:none;}
+
+#form-para .selectstuff{-moz-border-radius: 5px; -webkit-border-radius: 5px; border: 1px solid #79b7e7; font-weight: normal; text-decoration:none; cursor:pointer;}
+#form-para .selectstuff:hover{cursor:pointer; border: 1px solid #79b7e7; font-weight: normal; text-decoration:none;}
+
+#form-para .buttonstuff{cursor:pointer; border: 1px solid #79b7e7; font-weight: normal; text-decoration:none; -moz-border-radius: 5px; -webkit-border-radius: 5px;}
+#form-para .buttonstuff:hover{border: 1px solid #79b7e7; font-weight: normal; text-decoration:none;}
+
+#fieldt-c, #fieldt{
+    border-top: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    background: #dddddd;
+    font-weight: bold;
+    color: #666666;
+    margin-right: 0px;
+    padding-left: 5px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+
+
+
+#fieldh-c, #fieldh{
+    border-bottom: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    background: #eeeeee;
+    margin-right: 0px;
+    padding-left: 5px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+
+#fieldt-c, #fieldh-c{
+    border-left: 1px solid #dddddd;
+}
+
+.newQty input[type="text"]{
+    width: 100px;
+}
+
+.newSec input[type="text"]{
+    width: 150px;
+}
+
+.newCost input[type="text"]{
+    width: 100px;
+}
+
+#fieldm{
+    border-top: 1px solid #dddddd;
+    background: #dddddd;
+    margin-right: 0px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+
+#fieldr{
+    margin-right: 0px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+
+.sqdiv{
+    margin-top: 23px;
+}
+.tridiv
+{
+    margin-top: 35px;
+}
+
+.reddead{
+    background: #ff0000;
+}
+

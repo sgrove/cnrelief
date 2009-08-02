@@ -1,0 +1,24 @@
+.sqdiv
+.newQty
+  %div{:class=>"span-2", :id=>"fieldt-c"}
+    Delete?
+  %div{:class=>"span-3", :id=>"fieldt"}
+    Quantity
+  %div{:class=>"span-3", :id=>"fieldt"}
+    Markup
+  %div{:class=>"span-10 last", :id=>"fieldt"}
+    Note
+  .span-18
+    %div{:class=>"span-2", :id=>"fieldh-c"}
+      -#this loop seems to have a problem for costs and quantity. works for section
+      -#unless f.object.new_record?
+      =f.check_box('_delete')
+      .tridiv
+    %div{:class=>"span-3", :id=>"fieldh"}
+      =f.text_field :amount
+      .sqdiv
+    %div{:class=>"span-3", :id=>"fieldh"}
+      =f.text_field :markup
+      .sqdiv
+    %div{:class=>"span-10 last", :id=>"fieldh"}
+      =f.text_area :notes, :size=>"30x1"
