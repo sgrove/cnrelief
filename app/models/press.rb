@@ -1,12 +1,12 @@
 class Press < ActiveRecord::Base
   belongs_to :company
-  has_many :cost_sets, :as => :costable
+  has_many :costs, :as => :costable
 
-  def cost(cost_set_id, section, order_quantity)
-    runtime = self.calculate_runtime(section, :quantity => order_quantity)
+  def cost(cost_set_id, section_id, order_quantity)
+    runtime = self.calculate_runtime(Section.find(section_id), :quantity => order_quantity)
 
     puts "runtime: #{runtime}, generating cost..."
-    return runtime * self.costs("hourly", section.order.cost_set_id).cost
+    return runtime * self.costs("hourly", Section.find(section_id).order.cost_set_id).cost
   end
 
   def costs(kind, cost_set_id)
@@ -17,7 +17,11 @@ class Press < ActiveRecord::Base
   def calculate_runtime(section, options={})
     coverage = section.coverage
     paper_stock = section.paper_stock
+
+    puts "Generating quantity to run..."
     quantity = section.quantity_ordered(options[:quantity])
+
+    puts "getting color_count..."
     color_count = section.color_count
 
     puts "Arguments: #{options}"

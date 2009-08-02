@@ -11,7 +11,7 @@ class Section < ActiveRecord::Base
   validates_presence_of :order
   validates_format_of :finish_flat_size, :with => /\d+(\.\d+)?x\d+(\.\d+)?/, :message => "must be in the format ##.##x##.##"
   validates_format_of :finish_fold_size, :with => /\d+(\.\d+)?x\d+(\.\d+)?/, :message => "must be in the format ##.##x##.##"
-  validates_inclusion_of :layout, :in => %w( one-sided perfect sheet-wise work-in-turn work-in-tumble), :message => "Sorry, I don't recognize '{{value}}' as a valid layout."
+  validates_inclusion_of :layout, :in => %w( one-sided perfect sheet-wise work-and-turn work-and-tumble), :message => "Sorry, I don't recognize '{{value}}' as a valid layout."
 
   # What to do about the quantities?
 
@@ -50,16 +50,19 @@ class Section < ActiveRecord::Base
     
     prices = {}
     #prices["plates"] = color_count * 50 # This is a cheat. Choose a plate machine, then get this price later
-    prices["press"] = press.cost(self.order.cost_set, self, order_quantity)
-    prices["comp"] = 60
-    #prices["ink"] = 35 * color_count
+
+    #puts "Checking prepress prices: #{self.order.cost_set.id} #{self.id} nil"
+    prices["prepress"] = prepress.cost(self.order.cost_set_id, self.id, nil)
+    prices["press"] = press.cost(self.order.cost_set, self.id, nil)
     prices["paper"] = self.paper_stock.cost( :out => self.out, :quantity => q_allowed, :adjustment => 0.25 )
 
-    puts "prices: #{prices}"
+    #puts "prices: #{prices}"
+    sum = prices["prepress"] + prices["press"] + prices["paper"] 
+    puts "Total for #{q_ordered}: #{sum.round(2)}"
 
-    sum = prices["press"] + prices["comp"] + prices["paper"]
 
-    return sum
+
+    return sum.round(2)
   end
 
   def coverage
@@ -67,7 +70,7 @@ class Section < ActiveRecord::Base
   end
 
   def color_count
-    ink_side_1 + (ink_side_2.nil?? 0 : ink_side_2)
+    ink_side_1 + ((ink_side_2.nil? or self.layout == "work-and-turn")? 0 : ink_side_2)
   end
 
   def sides
@@ -94,6 +97,12 @@ class Section < ActiveRecord::Base
   end
 
   def quantity_ordered(quantity_ordered)
-    quantity_ordered * self.quantity_per_order
+    puts "Quantity Ordered: #{quantity_ordered} #{self.quantity_per_order}"
+    quantity_ordered.to_i * self.quantity_per_order.to_i
+  end
+
+  # Dummy method for now
+  def prepress
+    self.order.job.client.company.prepress
   end
 end

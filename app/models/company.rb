@@ -9,6 +9,8 @@ class Company < ActiveRecord::Base
   has_many :user_groups
   has_many :cost_sets
 
+  has_one :prepress
+
   def to_s
     self.name
   end
