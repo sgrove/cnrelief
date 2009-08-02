@@ -34,13 +34,13 @@
         |
         =link_to "PaperStocks", paper_stocks_path
         |
-        =link_to "Section", sections_path
-        |
         =link_to "My profile", edit_user_path(:current)
         |
         =link_to "Logout", logout_path
     %p{:style=>"color: green"}
       = flash[:notice]
+    %p{:style=>"color:pink"}
+      = flash[:warning]
 
     .container
       %div{:class=>"span-24", :id=>"page_content"}

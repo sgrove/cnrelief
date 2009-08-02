@@ -4,7 +4,7 @@
 %h3 Employees
 
 - for employee in @company.employees
-  %div="#{employee}"
+  %div="#{link_to employee, user_path( employee )}"
 
 %h3 Clients
 

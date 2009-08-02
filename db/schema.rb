@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 270) do
+ActiveRecord::Schema.define(:version => 340) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(:version => 270) do
     t.string   "state"
     t.string   "zip"
     t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "binderies", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -56,16 +63,36 @@ ActiveRecord::Schema.define(:version => 270) do
     t.string   "contactable_type"
   end
 
+  create_table "cost_sets", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "costs", :force => true do |t|
+    t.integer  "cost_set_id"
+    t.integer  "costable_id"
+    t.string   "costable_type"
+    t.string   "category"
+    t.string   "name"
+    t.string   "variable_on"
+    t.float    "cost"
+    t.float    "adjustment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "jobs", :force => true do |t|
     t.integer  "client_id"
-    t.integer  "number"
-    t.datetime "entered"
-    t.datetime "ordered"
-    t.integer  "estimator_id"
-    t.integer  "quoter_id"
-    t.integer  "csr_id"
-    t.integer  "contact_id"
-    t.integer  "overs_on_shelf"
+    t.string   "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "letterpresses", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -86,6 +113,7 @@ ActiveRecord::Schema.define(:version => 270) do
     t.integer  "csr_id"
     t.integer  "job_id"
     t.integer  "biller_id"
+    t.integer  "cost_set_id"
     t.integer  "contact_id"
     t.boolean  "billing_on_hold"
     t.string   "type"
@@ -149,6 +177,20 @@ ActiveRecord::Schema.define(:version => 270) do
     t.integer  "extension"
   end
 
+  create_table "platemachines", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "prepresses", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "press_costs", :force => true do |t|
     t.integer  "press_id"
     t.string   "name"
@@ -169,11 +211,10 @@ ActiveRecord::Schema.define(:version => 270) do
 
   create_table "presses", :force => true do |t|
     t.integer  "company_id"
-    t.string   "presses"
     t.string   "name"
     t.integer  "washup_initial_minutes"
     t.integer  "washup_additional_minutes"
-    t.integer  "plate_intitial_minutes"
+    t.integer  "plate_initial_minutes"
     t.integer  "plate_additional_minutes"
     t.integer  "die_cut_minutes"
     t.integer  "kiss_cut_minutes"
@@ -182,8 +223,17 @@ ActiveRecord::Schema.define(:version => 270) do
     t.integer  "normal_run_rate"
     t.integer  "minimum_run_rate"
     t.integer  "make_ready_sheets"
+    t.text     "run_rates"
+    t.float    "presses"
     t.float    "discount_percentage"
     t.float    "discount_hours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "proof_machines", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -202,25 +252,35 @@ ActiveRecord::Schema.define(:version => 270) do
     t.string   "name"
     t.string   "description"
     t.string   "alternate_name"
-    t.boolean  "include_section_on_quote"
-    t.boolean  "current_order"
+    t.boolean  "include_on_quote"
     t.string   "ink_coverage"
     t.boolean  "bleeds"
-    t.integer  "ink_side_1"
-    t.string   "ink_side_1_colors"
-    t.integer  "ink_side_2"
-    t.string   "ink_side_2_colors"
+    t.integer  "ink_count_side_1"
+    t.string   "side_1_color_list"
+    t.integer  "ink_count_side_2"
+    t.string   "side_2_color_list"
     t.integer  "paper_stock_id"
     t.text     "stock_description"
     t.boolean  "customer_supplied_stock"
     t.integer  "press_id"
-    t.string   "parent_size"
+    t.integer  "plate_machine_id"
+    t.integer  "proof_machine_id"
+    t.integer  "bindery_machine_id"
+    t.integer  "letterpress_machine_id"
     t.string   "press_size"
+    t.string   "finish_flat_size"
+    t.string   "finish_fold_size"
     t.integer  "out"
-    t.integer  "signature"
+    t.integer  "ups"
+    t.integer  "ups_2"
+    t.integer  "signatures"
     t.integer  "pages"
     t.string   "layout"
     t.float    "stock_sell_percent"
+    t.text     "prepress_list"
+    t.text     "bindery_list"
+    t.text     "letterpress_list"
+    t.integer  "quantity_per_order"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -235,37 +295,12 @@ ActiveRecord::Schema.define(:version => 270) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
-  create_table "taggings", :force => true do |t|
-    t.integer "tag_id"
-    t.integer "taggable_id"
-    t.string  "taggable_type"
-    t.integer "user_id"
-  end
-
-  add_index "taggings", ["tag_id", "taggable_type", "user_id"], :name => "index_taggings_on_user_id_and_tag_id_and_taggable_type"
-  add_index "taggings", ["tag_id", "taggable_type"], :name => "index_taggings_on_tag_id_and_taggable_type"
-  add_index "taggings", ["taggable_id", "taggable_type", "user_id"], :name => "index_taggings_on_user_id_and_taggable_id_and_taggable_type"
-  add_index "taggings", ["taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type"
-
-  create_table "tags", :force => true do |t|
-    t.string  "name"
-    t.integer "taggings_count", :default => 0, :null => false
-  end
-
-  add_index "tags", ["name"], :name => "index_tags_on_name"
-  add_index "tags", ["taggings_count"], :name => "index_tags_on_taggings_count"
-
   create_table "user_groups", :force => true do |t|
     t.string   "name"
-    t.string   "permissions"
+    t.text     "permissions"
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "user_groups_users", :id => false, :force => true do |t|
-    t.integer "user_group_id"
-    t.integer "user_id"
   end
 
   create_table "users", :force => true do |t|

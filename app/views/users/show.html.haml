@@ -1,7 +1,7 @@
 %h2="#{@user}'s Profile"
 
 %p
-  ="Group: #{@user.user_group}"
+  ="Group: #{@user.user_group} - (#{@user.user_group.name})"
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+="#{link_to 'Edit', edit_user_path(@user)} |"
+="#{link_to 'Back', company_path( @user.company )}"
