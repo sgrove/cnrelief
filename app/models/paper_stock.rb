@@ -1,4 +1,6 @@
 class PaperStock < ActiveRecord::Base
+  belongs_to :company
+  
   # Has notes: description, unit_description
   has_many :notes, :as => :notable
 
@@ -10,10 +12,16 @@ class PaperStock < ActiveRecord::Base
   end
 
   def cost(options={})
-    cost = (self.company_cost / options[:out]) * (options[:quantity] / 1000)
-    puts "PaperCost: (#{self.company_cost} / #{options[:out]}) * (#{options[:quantity]} / 1000)"
-    cost += cost * options[:adjustment]
-    puts "Adjusted (#{options[:adjustment] * 100}%): #{cost}"
+    debug = options[:debug] || false
+    puts "PaperStock Args: #{options}" if debug
+    cost = (self.company_cost.to_f / options[:out]) * (options[:quantity] / 1000.0)
+    cost += cost.to_f * options[:adjustment]
+
+    if debug
+      puts "PaperCost: (#{self.company_cost} / #{options[:out]}) * (#{options[:quantity]} / 1000)"
+      puts "Adjusted (#{options[:adjustment] * 100}%): #{cost}"
+    end
+
     return cost
   end
 end

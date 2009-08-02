@@ -11,16 +11,17 @@ class CreateSections < ActiveRecord::Migration
 
       t.string :ink_coverage
       t.boolean :bleeds
-      t.integer :ink_side_1
-      t.string :ink_side_1_colors
-      t.integer :ink_side_2
-      t.string :ink_side_2_colors
+      t.integer :ink_count_side_1
+      t.string :side_1_color_list
+      t.integer :ink_count_side_2
+      t.string :side_2_color_list
 
       t.references :paper_stock
       t.text :stock_description
       t.boolean :customer_supplied_stock
 
       t.references :press
+      t.references :plate_machine
       t.references :proof_machine
       t.references :bindery_machine
       t.references :letterpress_machine
@@ -29,15 +30,19 @@ class CreateSections < ActiveRecord::Migration
       t.string :finish_flat_size
       t.string :finish_fold_size
       t.integer :out
+      t.integer :ups
+      t.integer :ups_2
       t.integer :signatures
       t.integer :pages
       t.string :layout
       t.float :stock_sell_percent
 
-      # JSON encoded values: cost_name: cost_value
-      t.text :prepress_costs
-      t.text :bindery_costs
-      t.text :letterpress_costs
+      # Hash table values: cost_name: cost_value
+      t.text :prepress_list
+
+      # Hash table values: :category => [cost_name, cost_name, cost_name, ...]
+      t.text :bindery_list
+      t.text :letterpress_list
 
       t.integer :quantity_per_order
 
@@ -51,10 +56,10 @@ class CreateSections < ActiveRecord::Migration
     :alternate_name => "l/h",
     :include_on_quote => true,
     :ink_coverage => "light",
-    :ink_side_1 => 3,
-    :ink_side_1_colors => "PMS",
-    :ink_side_2 => 1,
-    :ink_side_2_colors => "Black",
+    :ink_count_side_1 => 3,
+    :side_1_color_list => "PMS",
+    :ink_count_side_2 => 1,
+    :side_2_color_list => "Black",
     :paper_stock_id => 1,
     :press_id => 1,
     :finish_flat_size => "8.5x11",
@@ -62,9 +67,14 @@ class CreateSections < ActiveRecord::Migration
     :out => 2,
     :signatures => 1,
     :pages => 1,
-    :layout => "perfect",
-    :quantity_per_order => 2,
-    :prepress_costs => "{\"design\":120,\"computer\":30,\"typesetting\":15}"
+    :bindery_machine_id => 1,
+    :letterpress_machine_id => 1,
+    :layout => "sheet-wise",
+    :quantity_per_order => 1,
+    :prepress_list => {:computer => 30, :epson_blueline => 2},
+    :bindery_list => {:fold => ["fold run letter"], :stitch => ["flat stiching"], :collate => ["col setup - hand", "col 9 - hand"], :cutting => ["10 up no bleed", "bc add'l"]},
+    :letterpress_list => {:emboss => ["emb setup", "emb run"]}
+    
 
     sct = Section.create \
     :order_id => 1,
@@ -72,10 +82,10 @@ class CreateSections < ActiveRecord::Migration
     :description =>"It's a cover!",
     :include_on_quote => true,
     :ink_coverage => "heavy",
-    :ink_side_1 => 2,
-    :ink_side_1_colors => "PMS",
-    :ink_side_2 => 2,
-    :ink_side_2_colors => "PMS",
+    :ink_count_side_1 => 2,
+    :side_1_color_list => "PMS",
+    :ink_count_side_2 => 2,
+    :side_2_color_list => "PMS",
     :paper_stock_id => 1,
     :press_id => 1,
     :finish_flat_size => "8.5x11",

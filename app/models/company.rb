@@ -8,6 +8,7 @@ class Company < ActiveRecord::Base
   has_many :presses
   has_many :user_groups
   has_many :cost_sets
+  has_many :paper_stocks
 
   has_one :prepress
 

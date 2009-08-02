@@ -14,7 +14,7 @@ class CreatePresses < ActiveRecord::Migration
       t.integer :normal_run_rate
       t.integer :minimum_run_rate
       t.integer :make_ready_sheets
-      t.string :run_rates
+      t.text :run_rates # Hash
       t.float :presses, :discount_percentage
       t.float :presses, :discount_hours
 
@@ -22,12 +22,13 @@ class CreatePresses < ActiveRecord::Migration
     end
 
     prs = Press.create \
+    :company_id => 1,
     :name => "LS640P",
     :washup_initial_minutes => 30,
     :washup_additional_minutes => 7,
     :plate_initial_minutes => 35,
     :plate_additional_minutes => 10,
-    :run_rates => "{\"medium\":8000,\"medium_heavy\":6500,\"heavy\":5000,\"light\":9500}"
+    :run_rates => {:light => 9500, :medium => 8000, :medium_heavy => 6500, :heavy => 5000}
   end
 
   def self.down

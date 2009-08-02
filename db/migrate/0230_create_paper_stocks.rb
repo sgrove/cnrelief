@@ -1,6 +1,8 @@
 class CreatePaperStocks < ActiveRecord::Migration
   def self.up
     create_table :paper_stocks do |t|
+      t.references :company
+      
       t.string :vendor
       t.integer :product_id
       t.string :category
