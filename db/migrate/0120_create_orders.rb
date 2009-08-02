@@ -19,7 +19,7 @@ class CreateOrders < ActiveRecord::Migration
 
       t.integer :final_quantity
       t.integer :quantity_ordered
-      t.integer :quanitity_overs
+      t.integer :quantity_overs
       t.integer :overs_on_shelf
 
       t.integer :quote_number
@@ -27,7 +27,7 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :consecutive_start
       t.integer :consecutive_end
       t.integer :number_of_parts
-      
+
       t.string :proof
       t.string :finish_flat_size
       t.string :finish_fold_size
@@ -35,7 +35,7 @@ class CreateOrders < ActiveRecord::Migration
       t.datetime :quoted_on
       t.datetime :ordered_on
       t.datetime :due_by
-      
+
       t.timestamps
     end
 
@@ -51,10 +51,11 @@ class CreateOrders < ActiveRecord::Migration
     :quoted_on => 5.days.ago,
     :ordered_on => 2.days.ago,
     :due_by => Time.now + 4.days
-    
+
   end
 
   def self.down
     drop_table :orders
   end
 end
+

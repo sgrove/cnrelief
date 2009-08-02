@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(:version => 290) do
     t.string   "status"
     t.integer  "final_quantity"
     t.integer  "quantity_ordered"
-    t.integer  "quanitity_overs"
+    t.integer  "quantity_overs"
     t.integer  "overs_on_shelf"
     t.integer  "quote_number"
     t.string   "form_number"
