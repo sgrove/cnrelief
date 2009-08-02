@@ -1,97 +1,127 @@
 -content_for :header do
+  =javascript_include_tag 'livequery'
   =javascript_include_tag 'new_edit_order'
+  =stylesheet_link_tag 'new_edit_order'
 
 .page_title
   New Quote/Order
 
 .span-24
-  -form_for @order do |f|
+  -form_for (@order) do |f|
+    -content_for :jstemplates do
+      ="var quantity='#{ generate_template(f, :quantities) }'"
+      ="var section='#{ generate_template(f, :sections) }'"
 
-    .span-24
-      #form-para
-        .span-8
-          =label :order, :quoted_on, "Date Quoted"
-          %br
-          =f.text_field :quoted_on
+    #tabs
+      %ul
+        %li
+          %a{:href=>"#tabs-1"}
+            Order Info
+        %li
+          %a{:href=>"#tabs-2"}
+            Quote & Print Details
+        %li
+          %a{:href=>"#tabs-3"}
+            Sections
+      #tabs-1
+        .span-18
+          #form-para
+            .span-6
+              =label :order, :quoted_on, "Date Quoted"
+              %br
+              =f.text_field :quoted_on
 
-        .span-8
-          =label :order, :ordered_on, "Date Ordered"
-          %br
-          =f.text_field :ordered_on
+            .span-6
+              =label :order, :ordered_on, "Date Ordered"
+              %br
+              =f.text_field :ordered_on
 
-        %div{:class=>"span-8 last"}
-          =label :order, :due_by, "Due by"
-          %br
-          =f.text_field :due_by
+            %div{:class=>"span-6 last"}
+              =label :order, :due_by, "Due by"
+              %br
+              =f.text_field :due_by
 
-    .span-24
-      #form-para
-        .span-8
-          =label :order, :csr_id, "CSR: "
-          .csr_id_field
-            None
-          %a{:href=>"Select CSR"}
-            Select CSR
-          =f.hidden_field :csr_id
+        .span-18
+          #form-para
+            .span-6
+              =label :order, :csr_id, "CSR: "
+              .csr_id_field
+                None
+              %a{:id=>"csr_dialog_link", :class=>"ui-state-default selectstuff"}
+                Select CSR
+              =f.hidden_field :csr_id
 
-        .span-8
-          =label :order, :estimator_id, "Estimator: "
-          .estimator_id_field
-            None
-          %a{:href=>"Select Estimator"}
-            Select Estimator
-          =f.hidden_field :estimator_id
+            .span-6
+              =label :order, :estimator_id, "Estimator: "
+              .estimator_id_field
+                None
+              %a{:id=>"estimator_dialog_link", :class=>"ui-state-default selectstuff"}
+                Select Estimator
+              =f.hidden_field :estimator_id
 
-        %div{:class=>"span-8 last"}
-          =label :order, :status, "Order Status: "
-          %br
-          =f.select (:status, ["quoted", "ordered"])
+            %div{:class=>"span-6 last"}
+              =label :order, :status, "Order Status: "
+              %br
+              =f.select (:status, ["quoted", "ordered"])
+
+      #tabs-2
+        #form-para
+          .span-18
+            .span-4
+              =label :order, :finish_flat_size, "Finish Flat Size"
+              %br
+              =f.text_field :finish_flat_size, :size=>"10"
+            .span-4
+              =label :order, :finish_fold_size, "Finish Fold Size"
+              %br
+              =f.text_field :finish_fold_size, :size=>"10"
+            .span-4
+              =label :order, :consecutive_start, "Consecutive start"
+              %br
+              =f.text_field :consecutive_start, :size=>"10"
+            %div{:class=>"span-4"}
+              =label :order, :consecutive_end, "Consecutive end"
+              %br
+              =f.text_field :consecutive_end, :size=>"10"
+
+        #form-para
+          .span-18
+            .span-4
+              =label :order, :quantity_ordered, "Quantity ordered"
+              %br
+              =f.text_field :quantity_ordered, :size=>"10"
+            .span-4
+              =label :order, :quanitity_overs, "Quantity overs"
+              %br
+              =f.text_field :quanitity_overs, :size=>"10"
+            .span-4
+              =label :order, :overs_on_shelf, "Overs on shelf"
+              %br
+              =f.text_field :overs_on_shelf, :size=>"10"
+            %div{:class=>"span-4 last"}
+              =label :order, :final_quantity, "Final quantity"
+              %br
+              =f.text_field :final_quantity, :size=>"10"
+
+        #form-para
+          .span-18
+            #subform-title
+              Quantities
+            %a{:id=>"newQty", :class=>"ui-state-default selectstuff"}
+              Add New Quantity
+            -f.fields_for :quantities do |nf|
+              =render :partial => 'quantity', :locals => { :f => nf }
 
 
+      #tabs-3
+        #form-para
+          .span-18
+            %a{:id=>"newSec", :class=>"ui-state-default selectstuff"}
+              Add New Section
+            -f.fields_for :sections do |nf|
+              =render :partial => 'section', :locals => { :f => nf }
 
-    .span-24
-      #subform-title
-        Print Details
-
-      #form-para
-        .span-10
-          =label :order, :proof, "Proof file"
-          %br
-          =f.file_field :proof
-
-        .span-7
-          =label :order, :finish_flat_size, "Finish Flat Size"
-          %br
-          =f.text_field :finish_flat_size
-        %div{:class=>"span-7 last"}
-          =label :order, :finish_fold_size, "Finish Fold Size"
-          %br
-          =f.text_field :finish_fold_size
-
-    .span-24
-      #form-para
-        .span-10
-          =label :order, :description, "Description"
-          %br
-          =f.text_area :description, :size=>"50x6"
-        %div{:class=>"span-14 last"}
-          .span-7
-            =label :order, :quantity_ordered, "Quantity Ordered"
-            %br
-            =f.text_field :quantity_ordered
-          %div{:class=>"span-7 last"}
-            =label :order, :overs_on_shelf, "Overs on Shelf"
-            %br
-            =f.text_field :overs_on_shelf
-          .span-7
-            =label :order, :consecutive_start, "Consecutive Start"
-            %br
-            =f.text_field :consecutive_start
-          %div{:class=>"span-7  last"}
-            =label :order, :consecutive_end, "Consecutive End"
-            %br
-            =f.text_field :consecutive_end
-    .span-24
-      #form-para
-        %p{:id=>"submit-button"}
-          =f.submit ("Create Quote/Order")
+#csr_dialog
+  Select CSR here
+#estimator_dialog
+  Select Estimator here
