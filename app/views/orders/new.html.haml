@@ -3,11 +3,14 @@
   =javascript_include_tag 'new_edit_order'
   =stylesheet_link_tag 'new_edit_order'
 
+.errors
+
 .page_title
   New Quote/Order
 
 .span-24
-  -form_for (@order) do |f|
+  -form_for @order, :url => {:action => :create} do |f|
+    =error_messages_for :order
     -content_for :jstemplates do
       ="var quantity='#{ generate_template(f, :quantities) }'"
       ="var section='#{ generate_template(f, :sections) }'"
@@ -93,7 +96,7 @@
             .span-4
               =label :order, :quantity_overs, "Quantity overs"
               %br
-              =f.text_field :quantity_overs, :size=>"10"
+              =#f.text_field :quantity_overs, :size=>"10"
             .span-4
               =label :order, :overs_on_shelf, "Overs on shelf"
               %br
@@ -110,7 +113,7 @@
             %a{:id=>"newQty", :class=>"ui-state-default selectstuff"}
               Add New Quantity
             -f.fields_for :quantities do |nf|
-              =render :partial => 'quantity', :locals => { :f => nf }
+              =#render :partial => 'quantity', :locals => { :f => nf }
 
 
       #tabs-3

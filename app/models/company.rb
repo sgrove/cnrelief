@@ -17,6 +17,10 @@ class Company < ActiveRecord::Base
   end
 
   def orders
+    jobs.orders
+  end
+
+  def orders
     self.jobs.collect(&:orders).flatten
   end
 

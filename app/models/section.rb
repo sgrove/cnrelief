@@ -13,7 +13,13 @@ class Section < ActiveRecord::Base
   has_many :costs, :as => :costable
   has_one :press_schedule
 
-  attr_accessible :unit_quantity, :debug
+  # overs_on_shelf, quantities, final_quantity, quantity_ordered, consecutive_start,
+  # estimator_id, due_by, quoted_on, csr_id, ordered_on, finish_flat_size, consecutive_end,
+  # finish_fold_size, status, sections_attributes
+
+  # attr_accessible :unit_quantity, :debug
+
+  accepts_nested_attributes_for :costs, :allow_destroy => true
 
   # Validations
   validates_presence_of :order

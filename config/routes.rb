@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :phone_numbers
   map.resources :addresses
   map.resources :clients
-  map.resources :companies, :has_many => [:employees, :presses, :clients]
+  map.resources :companies, :has_many => [:employees, :presses, :clients, :orders]
 
   map.login "/login", :controller => 'user_sessions', :action => "new"
   map.logout "/logout", :controller => 'user_sessions', :action => "destroy"

@@ -42,23 +42,23 @@
 
     %div{:class=>"span-18 last", :id=>"form-para"}
       %div{:class=>"span-9"}
-        =f.label :ink_side_1, "Number of colors on side-1"
+        =f.label :ink_count_side_1, "Number of colors on side-1"
         %br
-        =f.text_field :ink_side_1
+        =f.text_field :ink_count_side_1
       %div{:class=>"span-9 last"}
-        =f.label :ink_side_1_colors, "Ink colors on side-1"
+        =f.label :side_1_color_list, "Ink colors on side-1"
         %br
-        =f.select (:ink_side_1_colors, ["1 PM", "2PM", "3PM", "BLACK", "BLACK DIGITAL IMAGED", "CYMK", "CYMK & OADAQ", "CYMK & OAGAQ", "CYMK & SDAQ", "CYML & SGAQ", "CYML + UV", "COLORED DIGITAL IMAGED", "INK JET", "PMS", "PMS & BLACK"], {:include_blank => "None"})
+        =f.select (:side_1_color_list, ["1 PM", "2PM", "3PM", "BLACK", "BLACK DIGITAL IMAGED", "CYMK", "CYMK & OADAQ", "CYMK & OAGAQ", "CYMK & SDAQ", "CYML & SGAQ", "CYML + UV", "COLORED DIGITAL IMAGED", "INK JET", "PMS", "PMS & BLACK"], {:include_blank => "None"})
 
     %div{:class=>"span-18 last", :id=>"form-para"}
       %div{:class=>"span-9"}
-        =f.label :ink_side_2, "Number of colors on side-2"
+        =f.label :ink_count_side_2, "Number of colors on side-2"
         %br
-        =f.text_field :ink_side_2
+        =f.text_field :ink_count_side_2
       %div{:class=>"span-9 last"}
-        =f.label :ink_side_2_colors, "Ink colors on side-2"
+        =f.label :side_2_color_list, "Ink colors on side-2"
         %br
-        =f.select (:ink_side_2_colors, ["1 PM", "2PM", "3PM", "BLACK", "BLACK DIGITAL IMAGED", "CYMK", "CYMK & OADAQ", "CYMK & OAGAQ", "CYMK & SDAQ", "CYML & SGAQ", "CYML + UV", "COLORED DIGITAL IMAGED", "INK JET", "PMS", "PMS & BLACK"], {:include_blank => "None"})
+        =f.select (:side_2_color_list, ["1 PM", "2PM", "3PM", "BLACK", "BLACK DIGITAL IMAGED", "CYMK", "CYMK & OADAQ", "CYMK & OAGAQ", "CYMK & SDAQ", "CYML & SGAQ", "CYML + UV", "COLORED DIGITAL IMAGED", "INK JET", "PMS", "PMS & BLACK"], {:include_blank => "None"})
 
     %div{:class=>"span-18 last", :id=>"form-para"}
       %div{:class=>"span-9"}
