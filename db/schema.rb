@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(:version => 340) do
   end
 
   create_table "paper_stocks", :force => true do |t|
+    t.integer  "company_id"
     t.string   "vendor"
     t.integer  "product_id"
     t.string   "category"
