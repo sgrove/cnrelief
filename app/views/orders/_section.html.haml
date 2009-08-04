@@ -1,4 +1,4 @@
--@color_options = ["1 PM", "2PM", "3PM", "BLACK", "BLACK DIGITAL IMAGED", "CYMK", "CYMK & OADAQ", "CYMK & OAGAQ", "CYMK & SDAQ", "CYML & SGAQ", "CYML + UV", "COLORED DIGITAL IMAGED", "INK JET", "PMS", "PMS & BLACK"]
+
 
 .sqdiv
 %div{:class=>"newSec", :id=>"newSecSpace"}
@@ -7,126 +7,96 @@
     ="var cost='#{ generate_template(f, :costs) }'"
 
   %div{:class=>"span-18", :id=>"subform-title"}
-    New Section
+    .span-8
+      New Section
+    %div{:class=>"span-9 last", :id=>"form-title-option"}
+      -unless f.object.nil? or f.object.new_record?
+        =f.check_box('_delete')
+        =f.label('_delete', "Delete Section?")
   %div{:class=>"span-18", :id=>"fieldr"}
-    #form-para
-      %div{:class=>"span-9"}
-        -unless f.object.new_record?
-          =f.check_box('_delete')
-          =f.label('_delete', "Delete Section?")
-      %div{:class=>"span-9 last", :id=>"referd"}
-        =f.label :quantity_per_order, "Quantity per order"
-        %br
-        =f.text_field :quantity_per_order
-
-    %div{:class=>"span-18 last", :id=>"form-para"}
-      %div{:class=>"span-9"}
+    %div{:class=>"span-18 last"}
+      %div{:class=>"span-4"}
         =f.label :name, "Name"
         %br
-        =f.text_field :name
-      %div{:class=>"span-9 last"}
+        =f.text_field :name, :size=>"15"
+      %div{:class=>"span-4"}
         =f.label :alternate_name, "Alternate name"
         %br
-        =f.text_field :alternate_name
-
-    %div{:class=>"span-18 last", :id=>"form-para"}
-      %div{:class=>"span-9"}
-        =f.label :description, "Description"
+        =f.text_field :alternate_name, :size=>"15"
+      %div{:class=>"span-4", :id=>"referd"}
+        =f.label :quantity_per_order, "Quantity per order"
         %br
-        =f.text_area :description, :size=>"30x3"
-      %div{:class=>"span-9 last"}
-        =f.label :stock_description, "Stock description"
-        %br
-        =f.text_area :stock_description, :size=>"30x3"
-
-
-    %div{:class=>"span-18 last", :id=>"form-para"}
-      %div{:class=>"span-9"}
-        =f.label :ink_count_side_1, "Number of colors on side-1"
-        %br
-        =f.text_field :ink_count_side_1
-      %div{:class=>"span-9 last"}
-        =f.label :side_1_color_list, "Ink colors on side-1"
-        %br
-        =f.select (:side_1_color_list, ["1 PM", "2PM", "3PM", "BLACK", "BLACK DIGITAL IMAGED", "CYMK", "CYMK & OADAQ", "CYMK & OAGAQ", "CYMK & SDAQ", "CYML & SGAQ", "CYML + UV", "COLORED DIGITAL IMAGED", "INK JET", "PMS", "PMS & BLACK"], {:include_blank => "None"})
-
-    %div{:class=>"span-18 last", :id=>"form-para"}
-      %div{:class=>"span-9"}
-        =f.label :ink_count_side_2, "Number of colors on side-2"
-        %br
-        =f.text_field :ink_count_side_2
-      %div{:class=>"span-9 last"}
-        =f.label :side_2_color_list, "Ink colors on side-2"
-        %br
-        =f.select (:side_2_color_list, ["1 PM", "2PM", "3PM", "BLACK", "BLACK DIGITAL IMAGED", "CYMK", "CYMK & OADAQ", "CYMK & OAGAQ", "CYMK & SDAQ", "CYML & SGAQ", "CYML + UV", "COLORED DIGITAL IMAGED", "INK JET", "PMS", "PMS & BLACK"], {:include_blank => "None"})
-
-    %div{:class=>"span-18 last", :id=>"form-para"}
-      %div{:class=>"span-9"}
-        =f.label :finish_flat_size, "Finish flat size"
-        %br
-        =f.text_field :finish_flat_size
-      %div{:class=>"span-9 last"}
-        =f.label :finish_fold_size, "Finish fold size"
-        %br
-        =f.text_field :finish_fold_size
-
-
-    %div{:class=>"span-18 last", :id=>"form-para"}
-      %div{:class=>"span-9"}
-        =f.label :press_id, "Press Machine"
-        %br
-        =f.text_field :press_id
-      %div{:class=>"span-9 last"}
-        =f.label :paper_stock_id, "Paper Stock"
-        %br
-        =f.text_field :paper_stock_id
-
-    %div{:class=>"span-18 last", :id=>"form-para"}
-      %div{:class=>"span-9"}
-        =f.label :press_size, "Press size"
-        %br
-        =f.text_field :press_size
-      %div{:class=>"span-9 last"}
-        =f.label :layout, "Layout"
-        %br
-        =f.text_field :layout
-
-    %div{:class=>"span-18 last", :id=>"form-para"}
-      %div{:class=>"span-9"}
-        =f.label :out, "Out"
-        %br
-        =f.text_field :out
-      %div{:class=>"span-9 last"}
-        =f.label :signatures, "Signatures"
-        %br
-        =f.text_field :signatures
-
-    %div{:class=>"span-18 last", :id=>"form-para"}
-      %div{:class=>"span-9"}
-        =f.label :pages, "Pages"
-        %br
-        =f.text_field :pages
-      %div{:class=>"span-9 last"}
-        =f.label :stock_sell_percent, "Stock Sell Percent"
-        %br
-        =f.text_field :stock_sell_percent
-
-    %div{:class=>"span-18 last", :id=>"form-para"}
-      %div{:class=>"span-5"}
+        =f.text_field :quantity_per_order, :size=>"5"
+      %div{:class=>"span-6 last"}
         =f.check_box :include_on_quote
         =f.label :include_on_quote, "Include on quote?"
-      %div{:class=>"span-4"}
-        =f.check_box :bleeds
-        =f.label :bleeds, "Bleeds?"
-      %div{:class=>"span-6 last"}
+        %br
         =f.check_box :customer_supplied_stock
         =f.label :customer_supplied_stock, "Customer Supplied Stock?"
 
     %div{:class=>"span-18 last", :id=>"form-para"}
-      %hr
+      %div{:class=>"span-5"}
+        %div{:class=>"span-5 last"}
+          =f.label :description, "Description"
+          %br
+          =f.text_area :description, :size=>"20x3"
+        %div{:class=>"span-5"}
+          %br
+          =f.label :stock_description, "Stock description"
+          %br
+          =f.text_area :stock_description, :size=>"20x3"
+      %fieldset{:class=>"span-12 last"}
+        %legend Paper Stock
+        %div{:class=>"span-12 last"}
+          %div{:class=>"span-4", :id=>"labels-col"}
+            =f.label :finish_flat_size, "Finish flat size: "
+            =f.text_field :finish_flat_size, :size=>"6"
+          %div{:class=>"span-4", :id=>"labels-col"}
+            =f.label :out, "Number out: "
+            =f.text_field :out, :size=>"4"
+          %div{:class=>"span-3 last", :id=>"labels-col"}
+            =f.label :pages, "Pages: "
+            =f.text_field :pages, :size=>"4"
+        %div{:class=>"span-12 last"}
+          %div{:class=>"span-4", :id=>"labels-col"}
+            =f.label :finish_fold_size, "Finish fold size: "
+            =f.text_field :finish_fold_size, :size=>"6"
+          %div{:class=>"span-4", :id=>"labels-col"}
+            =f.label :signatures, "Signatures: "
+            =f.text_field :signatures, :size=>"4"
+          %div{:class=>"span-3 last", :id=>"labels-col"}
+            =f.check_box :bleeds
+            =f.label :bleeds, "Bleeds?"
+        %div{:class=>"span-12 last"}
+          %div{:class=>"span-5"}
+            =f.label :layout, "Layout: "
+            =f.text_field :layout, :size=>"15"
+          %div{:class=>"span-5 last"}
+            =f.label :press_size, "Press size: "
+            =f.text_field :press_size, :size=>"15"
+        %div{:class=>"span-12 last"}
+          %div{:class=>"span-5"}
+            =f.select :press_id, current_user.company.presses.map{|each_press| [each_press.name, each_press.id]}, {:include_blank => "Choose press machine"}
+          %div{:class=>"span-5 last"}
+            =f.select :paper_stock_id, current_user.company.paper_stocks.map{|each_paper| [each_paper.parent_sheet+", "+each_paper.color+", "+each_paper.finish, each_paper.id]}, {:include_blank => "Choose paper stock"}
+        %div{:class=>"span-12 last"}
+          %div{:class=>"span-5"}
+            =f.label :ink_count_side_1, "# of colors on side-1: "
+            =f.text_field :ink_count_side_1, :size=>"4"
+          %div{:class=>"span-5 last"}
+            =f.select(:side_1_color_list, ["1 PM", "2PM", "3PM", "BLACK", "BLACK DIGITAL IMAGED", "CYMK", "CYMK & OADAQ", "CYMK & OAGAQ", "CYMK & SDAQ", "CYML & SGAQ", "CYML + UV", "COLORED DIGITAL IMAGED", "INK JET", "PMS", "PMS & BLACK"], {:include_blank => "No colors on side-1"})
+        %div{:class=>"span-12 last"}
+          %div{:class=>"span-5"}
+            =f.label :ink_count_side_2, "# of colors on side-2: "
+            =f.text_field :ink_count_side_2, :size=>"4"
+          %div{:class=>"span-5 last"}
+            =f.select(:side_2_color_list, ["1 PM", "2PM", "3PM", "BLACK", "BLACK DIGITAL IMAGED", "CYMK", "CYMK & OADAQ", "CYMK & OAGAQ", "CYMK & SDAQ", "CYML & SGAQ", "CYML + UV", "COLORED DIGITAL IMAGED", "INK JET", "PMS", "PMS & BLACK"], {:include_blank => "No colors on side-2"})
+
+    %div{:class=>"span-18 last"}
       %div{:class=>"span-18 last"}
-        %a{:class=>"newCostlink ui-state-default selectstuff"}
-          Add New Cost
+        %p{:align=>"center"}
+          %a{:class=>"newCostlink ui-state-default selectstuff"}
+            Add New Cost
       %div{:class=>"span-18 last"}
         -f.fields_for :costs do |nfc|
           =render :partial => 'cost', :locals => { :f => nfc }

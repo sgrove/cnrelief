@@ -1,6 +1,7 @@
 -content_for :header do
   =javascript_include_tag 'livequery'
   =javascript_include_tag 'new_edit_order'
+  =javascript_include_tag 'autocomplete'
   =stylesheet_link_tag 'new_edit_order'
 
 .errors
@@ -48,20 +49,12 @@
           #form-para
             .span-6
               =label :order, :csr_id, "CSR: "
-              .csr_id_field
-                None
-              %a{:id=>"csr_dialog_link", :class=>"ui-state-default selectstuff"}
-                Select CSR
-              =f.hidden_field :csr_id
-
+              %br
+              =f.text_field :csr_id
             .span-6
               =label :order, :estimator_id, "Estimator: "
-              .estimator_id_field
-                None
-              %a{:id=>"estimator_dialog_link", :class=>"ui-state-default selectstuff"}
-                Select Estimator
-              =f.hidden_field :estimator_id
-
+              %br
+              =f.text_field :estimator_id
             %div{:class=>"span-6 last"}
               =label :order, :status, "Order Status: "
               %br
@@ -126,8 +119,3 @@
               Add New Section
             -f.fields_for :sections do |nf|
               =render :partial => 'section', :locals => { :f => nf }
-
-#csr_dialog
-  Select CSR here
-#estimator_dialog
-  Select Estimator here

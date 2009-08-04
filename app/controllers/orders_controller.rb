@@ -56,3 +56,4 @@ class OrdersController < ApplicationController
     redirect_to company_orders_path(current_user.company)
   end
 end
+

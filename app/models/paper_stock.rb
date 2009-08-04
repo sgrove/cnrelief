@@ -1,9 +1,8 @@
 class PaperStock < ActiveRecord::Base
   belongs_to :company
-  
+
   # Has notes: description, unit_description
   has_many :notes, :as => :notable
-
   # Cheating for now, add in later
   # belongs_to :cost_set
 
@@ -25,3 +24,4 @@ class PaperStock < ActiveRecord::Base
     return cost
   end
 end
+

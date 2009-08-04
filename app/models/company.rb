@@ -31,7 +31,7 @@ class Company < ActiveRecord::Base
   # group_name should not include the company prefix
   def add_employee_to_group(employee_id, group_name)
     g = self.user_groups.find_by_name("#{self.name}_#{group_name}")
-    
+
 
     e = self.employees.find(employee_id)
     puts "Adding #{e} to #{g}"
@@ -85,3 +85,4 @@ class Company < ActiveRecord::Base
     create_default_groups! if new
   end
 end
+
