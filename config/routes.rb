@@ -4,6 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :password_resets
   map.resource :user_session
 
+  map.resources :cost_sets
   map.resources :paper_stocks
   map.resources :presses
   map.resources :sections

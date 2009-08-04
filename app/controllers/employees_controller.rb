@@ -1,4 +1,6 @@
 class EmployeesController < ApplicationController
+  before_filter :require_login
+  
   before_filter :get_company
   before_filter :get_employee, :except => [:index, :new, :create]
 
@@ -8,11 +10,8 @@ class EmployeesController < ApplicationController
   before_filter :has_permission_to_destroy, :only => [:destroy]
 
   def index
-    search = params[:search] || "*"
+    search = params[:search] || params[:text] || "*"
     @employees = @company.employees.named_like(search)
-
-    
-    
 
     respond_to do |format|
       format.html
@@ -20,7 +19,7 @@ class EmployeesController < ApplicationController
       format.js {
         @e = []
         @employees.each do |employee|
-          @e << {:user => {:id => employee.id, :name => "#{employee.contact.first} #{employee.contact.last}"}}
+          @e << {"#{employee.id}".to_sym => "#{employee.contact.first} #{employee.contact.last}"}
         end
         render :json => @e.to_json}
     end
@@ -75,8 +74,12 @@ class EmployeesController < ApplicationController
   
   protected
 
+  def require_login
+    redirect_to login_path unless current_user.logged_in?
+  end
+
   def get_company
-    @company = Company.find(params[:company_id])
+    @company = current_user.company
   end
 
   def get_employee
