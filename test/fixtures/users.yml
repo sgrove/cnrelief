@@ -1,7 +1,18 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-# one:
-#   column: value
-#
-# two:
-#   column: value
+primary:
+  id: 1
+  company_id: 1
+  user_group_id: 1
+  login: "sgrove"
+  email: "sgrove@cnrelief.com"
+  crypted_password: "c2ac6ef80e1317a2fa409d5872d3195a603344b6c74d95ea371721df4756c7b2aa03f464716bc48147874796722dd558addea19d17181b0a92b69859c5d2f5b5"
+  password_salt: "K94HkInEWzVqx7nC3C2n"
+  persistence_token: "7ed970591000023f8da3d9c5f5ca4a5b108bc56b1b552b8bd9516b2dd84a50671e05ac163b0142cacf3af44039033cd9bb72711e092fc1ffec3226294147954b"
+  single_access_token: "jFxb9g2Q1wM8CyZgWCdv"
+  perishable_token: "YfQjKkwINP80cMJLoWKI"
+  login_count: 4
+  failed_login_count: 0
+  last_request_at: "2009-08-03 09:17:47"
+  current_login_at: "2009-08-03 03:03:49"
+  last_login_at: "2009-08-02 23:50:56"
+  current_login_ip: "127.0.0.1"
+  last_login_ip: "127.0.0.1"

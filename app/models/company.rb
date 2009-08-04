@@ -70,9 +70,15 @@ class Company < ActiveRecord::Base
       logger.debug group[1].gsub('\n','').gsub(/\s+/,'')
       self.user_groups.create(:name => group[0], :permissions => group[1].gsub('\n','').gsub(/\s+/,''))
     end
-    
   end
 
+  def user_is_a(user, role)
+    group = self.user_groups.named("#{self.name}_#{role}")
+    return false if group.nil? or user.user_group != group
+    return true if user.user_group == group
+    false # <-- Just a catchall...the above two lines should catch all cases
+  end
+  
   def save
     new = self.new_record?
     super

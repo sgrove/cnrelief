@@ -3,6 +3,7 @@ class CreatePresses < ActiveRecord::Migration
     create_table :presses do |t|
       t.references :company
       t.string :name
+      t.string :size
       t.integer :washup_initial_minutes
       t.integer :washup_additional_minutes
       t.integer :plate_initial_minutes
@@ -24,6 +25,7 @@ class CreatePresses < ActiveRecord::Migration
     prs = Press.create \
     :company_id => 1,
     :name => "LS640P",
+    :size => "40",
     :washup_initial_minutes => 30,
     :washup_additional_minutes => 7,
     :plate_initial_minutes => 35,

@@ -16,7 +16,7 @@ class CompaniesController < ApplicationController
   protected
 
   def has_permission_to_modify
-    flash[:warnings] = "Sorry, you don't have permission to do that." and redirect_to :back unless current_user.has_permission_to "modify_company"
+    flash[:warnings] = "Sorry, you don't have permission to do that." and redirect_to :back unless current_user.has_permission_to? "modify_company"
 
   end
 end

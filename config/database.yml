@@ -21,8 +21,14 @@ development:
   
 test: &test
   # Sqlite Settings
-  adapter: sqlite3
-  database: db/printworks_test
+  #adapter: sqlite3
+  #database: db/printworks_test
+  #pool: 5
+  #timeout: 5000
+
+  # Postgresql Settings
+  adapter: postgresql
+  database: printworks_test
   pool: 5
   timeout: 5000
 

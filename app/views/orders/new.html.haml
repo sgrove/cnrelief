@@ -67,6 +67,9 @@
               %br
               =f.select (:status, ["quoted", "ordered"])
 
+            %div{:class=>"span-6 last"}
+              =f.collection_select(:cost_set_id, current_user.company.cost_sets, :id, :name, :prompt => "Select a cost set")
+
       #tabs-2
         #form-para
           .span-18

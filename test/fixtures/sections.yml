@@ -1,7 +1,36 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-# one:
-#   column: value
-#
-# two:
-#   column: value
+primary:
+  id: 1
+  order_id: 1
+  status: "nil"
+  name: "Letterhead"
+  description: "Letterhead section description"
+  alternate_name: "L/H"
+  include_on_quote: true
+  ink_coverage: "light"
+  bleeds: false
+  ink_count_side_1: 3
+  ink_count_side_2: 1
+  side_1_color_list: "PMS"
+  side_2_color_list: "Black"
+  paper_stock_id: 1
+  stock_description: nil
+  customer_supplied_stock: false
+  press_id: 1
+  plate_machine_id: 1
+  proof_machine_id: 1
+  bindery_machine_id: 1
+  letterpress_machine_id: 1
+  press_size: nil
+  finish_flat_size: "8.5x11"
+  finish_fold_size: "8.5x11"
+  out: 2
+  ups: nil
+  ups_2: nil
+  signatures: 1
+  pages: 1
+  layout: "sheet-wise"
+  stock_sell_percent: 0.0
+  bindery_list: <% {:stitch =>["flat stiching"]} %>
+  prepress_list: <% {:computer => 30, :epson_blueline => 2} %>
+  letterpress_list: <% {:emboss => ["setup", "run"]} %>
+  quantity_per_order: 1

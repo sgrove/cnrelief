@@ -10,8 +10,6 @@ class Bindery < ActiveRecord::Base
     ups = options[:ups]
     charges = options[:charges]
 
-    puts "Ups: #{ups} (#{options[:ups]})"
-
     sum = 0.0
 
     charges.each do |category, pairs|
@@ -33,16 +31,16 @@ class Bindery < ActiveRecord::Base
           end
 
           if cost.variable_on? "fixed"
-            puts "#{category} #{index} is fixed at $#{cost.cost}"
+            puts "#{category} #{index} is fixed at $#{cost.cost}" if debug
             sum += cost.cost
           elsif cost.variable_on?("quantity") or  cost.variable_on?("quantity_ordered")
-            puts "#{category} #{index} is variable on ordered $#{cost.cost}/1000 => $#{cost.cost * options[:quantity] / 1000.0 / ups}"
+            puts "#{category} #{index} is variable on ordered $#{cost.cost}/1000 => $#{cost.cost * options[:quantity] / 1000.0 / ups}" if debug
             sum += cost.cost * options[:quantity] / 1000.0 / ups
           elsif cost.variable_on? "quantity_required"
-            puts "#{category} #{index} is variable on allowed $#{cost.cost}/1000 => $#{cost.cost * options[:quantity] / 1000.0 / ups}"
+            puts "#{category} #{index} is variable on allowed $#{cost.cost}/1000 => $#{cost.cost * options[:quantity] / 1000.0 / ups}" if debug
             sum += cost.cost * options[:quantity] / 1000.0 / ups
           else
-            puts "I don't know what to do with #{category} #{index}, variable on #{cost.variable_on} for $#{cost.cost} => $#{cost.cost * options[:quantity] / 1000.0}"
+            puts "I don't know what to do with #{category} #{index}, variable on #{cost.variable_on} for $#{cost.cost} => $#{cost.cost * options[:quantity] / 1000.0}" if debug
           end
         end
       end

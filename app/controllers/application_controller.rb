@@ -11,7 +11,9 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
 
   helper_method :current_user_session, :current_user, \
-    :logged_in?, :current_user_is_admin?
+  :logged_in?, :current_user_is_admin?, :current_company
+
+  before_filter :current_company
 
   protected
 
@@ -30,5 +32,10 @@ class ApplicationController < ActionController::Base
   def current_user
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.user
+  end
+
+  def current_company
+     return @current_user.company if defined?(@current_user)
+    nil
   end
 end

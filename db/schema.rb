@@ -10,6 +10,7 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 340) do
+
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
     t.string   "addressable_type"
@@ -122,7 +123,7 @@ ActiveRecord::Schema.define(:version => 340) do
     t.string   "status"
     t.integer  "final_quantity"
     t.integer  "quantity_ordered"
-    t.integer  "quantity_overs"
+    t.integer  "quanitity_overs"
     t.integer  "overs_on_shelf"
     t.integer  "quote_number"
     t.string   "form_number"
@@ -211,6 +212,7 @@ ActiveRecord::Schema.define(:version => 340) do
   create_table "presses", :force => true do |t|
     t.integer  "company_id"
     t.string   "name"
+    t.string   "size"
     t.integer  "washup_initial_minutes"
     t.integer  "washup_additional_minutes"
     t.integer  "plate_initial_minutes"

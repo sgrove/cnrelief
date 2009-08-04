@@ -2,11 +2,17 @@ class User < ActiveRecord::Base
   belongs_to :company
   belongs_to :user_group
 
-  has_one :contact, :as => :contactable
+  has_one :contact, :as => :contactable, :dependent => :destroy
   has_one :address, :as => :addressable
   has_many :phone_numbers, :through => :contacts
 
   default_scope :order => "created_at ASC"
+  named_scope :named_like, lambda { |*args| {
+      :select => "users.id, users.login, users.created_at",
+      :joins => "INNER JOIN contacts ON contacts.contactable_id = users.id", 
+      :conditions=> ["users.login ILIKE ? OR contacts.first ILIKE ? OR contacts.last ILIKE ? ", "#{args.first.downcase}%", "#{args.first.downcase}%", "#{args.first.downcase}%"]
+    }}
+
   
   acts_as_authentic do |c|
     c.validate_login_field = false
@@ -50,6 +56,6 @@ class User < ActiveRecord::Base
   end
 
   def permissions
-    self.group.permissions
+    self.user_group.permissions
   end
 end

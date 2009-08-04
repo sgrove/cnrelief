@@ -1,7 +1,29 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-# one:
-#   column: value
-#
-# two:
-#   column: value
+primary:
+  id: 1
+  entry_id: nil
+  estimator_id: 1
+  csr_id: 2
+  job_id: 1
+  biller_id: 1
+  cost_set_id: 1
+  contact_id: nil
+  billing_on_hold: false
+  po: nil
+  turnaround: nil
+  description: nil
+  status: nil
+  final_quantity: nil
+  quantity_ordered: 1000
+  quantity_overs: nil
+  overs_on_shelf: nil
+  quote_number: nil
+  form_number: nil
+  consecutive_start: nil
+  consecutive_end: nil
+  number_of_parts: nil
+  proof: nil
+  finish_flat_size: "8.5x11"
+  finish_fold_size: "8.5x11"
+  quoted_on: <% 2.days.ago %>
+  ordered_on: <% 1.days.ago %>
+  due_by: <% Time.now + 5.days %>

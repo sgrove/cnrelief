@@ -8,7 +8,22 @@ class EmployeesController < ApplicationController
   before_filter :has_permission_to_destroy, :only => [:destroy]
 
   def index
-    @employees = @company.employees
+    search = params[:search] || "*"
+    @employees = @company.employees.named_like(search)
+
+    
+    
+
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @employees.to_xml }
+      format.js {
+        @e = []
+        @employees.each do |employee|
+          @e << {:user => {:id => employee.id, :name => "#{employee.contact.first} #{employee.contact.last}"}}
+        end
+        render :json => @e.to_json}
+    end
   end
 
   def show

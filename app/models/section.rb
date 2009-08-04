@@ -34,19 +34,28 @@ class Section < ActiveRecord::Base
     self.press_size = self.order.press_size
   end
 
+  def optimize_paper(larger, smaller)
+    l1, l2 = larger.split("x")
+    s1, s2 = smaller.split("x")
+    
+    portrait_outs  = (l1.to_f / s1.to_f).truncate * (l2.to_f / s2.to_f).truncate
+    landscape_outs = (l1.to_f / s2.to_f).truncate * (l2.to_f / s1.to_f).truncate
+    
+    return {:outs => portrait_outs, :layout => "portrait"} if portrait_outs > landscape_outs
+    return {:outs => landscape_outs, :layout => "landscape"}
+  end
+
+  def calculate_prepress_size
+    press_size = press.size
+    parent_size = paper_stock.parent_size
+    x, y = parent_size.split("x")
+
+    return paper_stock.parent_size unless (x > parent_size) or (y > parent_size)
+  end
+
   # Used to suggest number of ups on a given page
   def calculate_ups
-    # Define number of times we can print job on a given page size
-    # Calculate: (press_sheet_size.horizontal / finish_flat_size.horizontal) *
-    #            (press_sheet_size.vertical / finish_flat_size.vertical)
-    # [23x17.5 -> 3x5]: [(23 / 3) * (17.5 * 5)].truncate
-    # (7.666).truncate * (3.5).truncate
-
-    x,  y  = self.paper_stock.parent_sheet.split("x")
-    x2, y2 = x.to_f, y.to_f / self.out # Dividing along the y-axis
-    x3, y3 = self.finish_flat_size.split("x")
-
-    return (x2.to_f / x3.to_f).truncate * (y2.to_f / y3.to_f).truncate
+    optimize_paper(self.press_size, self.finish_flat_size)[:outs]
   end
 
   def calculate_stock_price(markup = self.stock_sell_percent)
@@ -88,9 +97,11 @@ class Section < ActiveRecord::Base
 
     return prices[:prepress] if unit_quantity <= 0
 
-    puts "#{unit_quantity}:"
-    puts " $#{sum}"
-    puts "#{(sum / unit_quantity).round(2)}"
+    if @debug
+      puts "#{unit_quantity}:"
+      puts " $#{sum}"
+      puts "#{(sum / unit_quantity).round(2)}"
+    end
     return sum.round(2)
   end
 

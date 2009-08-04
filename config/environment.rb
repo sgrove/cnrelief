@@ -6,6 +6,8 @@ RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+require 'json/pure'
+
 Rails::Initializer.run do |config|
   config.gem 'builder'
   config.gem 'nokogiri'
@@ -52,3 +54,4 @@ Rails::Initializer.run do |config|
 end
 
 Time::DATE_FORMATS[:en_US] = "%m/%d/%Y"
+

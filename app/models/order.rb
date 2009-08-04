@@ -28,4 +28,12 @@ class Order < ActiveRecord::Base
     self.quoter = job.quoter
     self.contact = job.contact
   end
+
+  def company
+    self.job.client.company
+  end
+
+  def cost(quantity)
+    sections.each.inject(0) { |sum, section| sum + section.cost(quantity) }
+  end
 end
