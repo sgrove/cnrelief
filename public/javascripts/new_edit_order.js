@@ -3,11 +3,14 @@ $(function() {
     $("#order_ordered_on").datepicker();
     $("#order_due_by").datepicker();
 
+    //auto-complete fields
+    $("#order_csr_id").autocomplete("/employees");
+    $("#order_estimator_id").autocomplete("/employees");
+
     //Tabs
     $("#tabs").tabs().addClass('ui-tabs-vertical ui-helper-clearfix').removeClass('ui-corner-all');
-    $("#tabs li").removeClass('ui-corner-top').addClass('ui-corner-all');
+    $("#tabs li").removeClass('ui-corner-top').removeClass('ui-corner-all');
     $("#tabs ul").removeClass('ui-widget-header');
-
 
     $("#newQty").click( function() {
         var new_id = new Date().getTime();
@@ -30,58 +33,6 @@ $(function() {
         template = template.replace(/NEW_RECORD/g, new_id);
         $(this).after(template);
     });
-
-
-
-    //Dialogues
-
-    //CSR dialog defn
-    $('#csr_dialog').dialog({
-		title: "Select CSR for the order",
-		draggable: false,
-		modal: true,
-		resizable: false,
-		autoOpen: false,
-		width: 600,
-		buttons: {
-			"Ok": function() {
-				$(this).dialog("close");
-			},
-			"Cancel": function() {
-				$(this).dialog("close");
-			}
-		}
-	});
-
-    //CSR dialog open link
-	$('#csr_dialog_link').click(function(){
-		$('#csr_dialog').dialog('open');
-		return false;
-	});
-
-    //Estimator dialog defn
-    $('#estimator_dialog').dialog({
-        title: "Select estimator for the order",
-        draggable: false,
-        modal: true,
-		resizable: false,
-		autoOpen: false,
-		width: 600,
-		buttons: {
-			"Ok": function() {
-				$(this).dialog("close");
-			},
-			"Cancel": function() {
-				$(this).dialog("close");
-			}
-		}
-	});
-
-    //Estimator dialog open link
-	$('#estimator_dialog_link').click(function(){
-		$('#estimator_dialog').dialog('open');
-		return false;
-	});
 
 });
 

@@ -55,4 +55,10 @@ class OrdersController < ApplicationController
     flash[:notice] = "Successfully destroyed order."
     redirect_to company_orders_path(current_user.company)
   end
+
+  def jsonget
+    @jsonstr = '[{"contact": {"name":null,"contactable_type":"User","middle":null,"created_at":"2009-08-03T00:34:04Z","contactable_id":1,"updated_at":"2009-08-03T00:43:35Z","last":"Grove","id":1,"first":"Sean","email":"sgrove@freshpress.com"}}]'
+  end
+
 end
+
