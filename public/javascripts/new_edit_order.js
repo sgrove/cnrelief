@@ -7,6 +7,40 @@ $(function() {
     $("#order_csr_id").autocomplete("/employees");
     $("#order_estimator_id").autocomplete("/employees");
 
+    //cost categpry select
+    $(".costCatSelect").livequery('change', function()
+                {
+                    alert("into func!");
+
+                    //work-around to take care not to return previous section values
+                    var catval = $(this).closest('#costCatField').find('select').val();
+                    var cost_set_id = $("#order_cost_set_id").val();
+                    if(cost_set_id=="")
+                    {
+                        alert("Please select a cost set in the order details");
+                    }
+                    else
+                    {
+                        //url pattern /cost_sets/{cost_set_id}?category={category_id}
+                        $.getJSON("/cost_sets/"+cost_set_id+"?category="+catval, function(data, textStatus)
+                        {
+                            if(textStatus!="success")
+                            {
+                                alert("ouch! the program sensed an error");
+                            }
+                            else
+                            {
+                                var tmpstr="";
+                                for(cost in data)
+                                {
+                                    tmpstr +='<li value="'+cost.cost_id+'">'+cost.name+'<li>';
+                                }
+                                var catval = $(this).closest('#costCatField').find('.costNames').html(tmpstr);
+                            }
+                        });
+                    }
+                });
+
     //Tabs
     $("#tabs").tabs().addClass('ui-tabs-vertical ui-helper-clearfix').removeClass('ui-corner-all');
     $("#tabs li").removeClass('ui-corner-top').removeClass('ui-corner-all');

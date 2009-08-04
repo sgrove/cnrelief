@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(:version => 340) do
     t.string   "status"
     t.integer  "final_quantity"
     t.integer  "quantity_ordered"
-    t.integer  "quanitity_overs"
+    t.integer  "quantity_overs"
     t.integer  "overs_on_shelf"
     t.integer  "quote_number"
     t.string   "form_number"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(:version => 340) do
   end
 
   create_table "paper_stocks", :force => true do |t|
+    t.integer  "company_id"
     t.string   "vendor"
     t.integer  "product_id"
     t.string   "category"
