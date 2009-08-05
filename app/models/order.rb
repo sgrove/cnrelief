@@ -37,4 +37,11 @@ class Order < ActiveRecord::Base
   def cost(quantity)
     sections.each.inject(0) { |sum, section| sum + section.cost(quantity) }
   end
+
+  def client
+    self.job.client
+  end
+
+
 end
+

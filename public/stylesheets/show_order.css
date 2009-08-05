@@ -1,0 +1,48 @@
+#fieldt-c, #fieldt{
+    border-top: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    background: #dddddd;
+    font-weight: bold;
+    color: #666666;
+    margin-right: 0px;
+    padding-left: 5px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+
+#fieldh-c, #fieldh{
+    border-bottom: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    background: #eeeeee;
+    margin-right: 0px;
+    padding-left: 5px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+
+#fieldt-c, #fieldh-c{
+    border-left: 1px solid #dddddd;
+}
+
+#para-nb, #para{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+#para{
+    border-bottom: 1px solid #cccccc;
+}
+
+h4{
+    text-align: center;
+    color: #999999;
+    font-weight: bold;
+}
+
+.fieldname{
+    color: #666666;
+    font-weight: bold;
+}
+

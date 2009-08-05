@@ -1,0 +1,78 @@
+-content_for :header do
+  =stylesheet_link_tag 'show_order'
+
+.page_title
+  Order
+
+%div{:class=>"span-24 last", :id=>"para"}
+  .span-6
+    %span{:class=>"fieldname"}
+      Client:
+    %br
+    =#@order.job.client.name
+  .span-6
+    %span{:class=>"fieldname"}
+      CSR:
+    %br
+    =@order.csr.email
+  .span-6
+    %span{:class=>"fieldname"}
+      Estimator:
+    %br
+    =@order.estimator.email
+  %div{:class=>"span-6 last"}
+    %span{:class=>"fieldname"}
+      Status:
+    %br
+    =@order.status
+
+%div{:class=>"span-24 last", :id=>"para"}
+  .span-6
+    %span{:class=>"fieldname"}
+      Quoted on:
+    %br
+    =@order.quoted_on
+  .span-6
+    %span{:class=>"fieldname"}
+      Ordered on:
+    %br
+    =@order.ordered_on
+  .span-6
+    %span{:class=>"fieldname"}
+      Due by:
+    %br
+    =@order.due_by
+  %div{:class=>"span-6 last"}
+    %span{:class=>"fieldname"}
+      Final quantity:
+    %br
+    =@order.final_quantity
+
+%div{:class=>"span-24 last", :id=>"para-nb"}
+  .span-7
+    %h4
+      Quantities
+    %div{:class=>"span-3", :id=>"fieldt-c"}
+      Quantity
+    %div{:class=>"span-3 last", :id=>"fieldt"}
+      Price
+    -@order.quantities.each do |each_qty|
+      %div{:class=>"span-3", :id=>"fieldh-c"}
+        =each_qty.amount
+      %div{:class=>"span-3 last", :id=>"fieldh"}
+        =@order.cost(each_qty.amount)
+  %div{:class=>"span-7 last"}
+    %div{:class=>"span-7 last"}
+      %h4
+        Sections
+    %div{:class=>"span-7 last"}
+      %div{:class=>"span-3", :id=>"fieldt-c"}
+        Name
+      %div{:class=>"span-3 last", :id=>"fieldt"}
+        Press
+    -@order.sections.each do |each_sec|
+      %div{:class=>"span-16 last"}
+        %div{:class=>"span-3", :id=>"fieldh-c"}
+          =each_sec.name
+        %div{:class=>"span-3 last", :id=>"fieldh"}
+          =each_sec.press.name
