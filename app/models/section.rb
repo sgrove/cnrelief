@@ -22,7 +22,7 @@ class Section < ActiveRecord::Base
   accepts_nested_attributes_for :costs, :allow_destroy => true
 
   # Validations
-  validates_presence_of :order
+  # validates_presence_of :order
   validates_format_of :finish_flat_size, :with => /\d+(\.\d+)?x\d+(\.\d+)?/, :message => "must be in the format ##.##x##.##"
   validates_format_of :finish_fold_size, :with => /\d+(\.\d+)?x\d+(\.\d+)?/, :message => "must be in the format ##.##x##.##"
   validates_inclusion_of :layout, :in => %w( one-sided perfect sheet-wise work-and-turn work-and-tumble), :message => "Sorry, I don't recognize '{{value}}' as a valid layout."

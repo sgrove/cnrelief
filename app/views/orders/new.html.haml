@@ -104,8 +104,8 @@
               Quantities
             %a{:id=>"newQty", :class=>"ui-state-default selectstuff"}
               Add New Quantity
-            -f.fields_for :quantities do |nf|
-              =render :partial => 'quantity', :locals => { :f => nf }
+            -f.fields_for :quantities do |qf|
+              =render :partial => 'quantity', :locals => { :f => qf }
 
 
       #tabs-3

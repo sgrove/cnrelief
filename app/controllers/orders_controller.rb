@@ -26,6 +26,10 @@ class OrdersController < ApplicationController
       redirect_to(company_orders_path( current_user.company ))
     else
       flash[:warning] = "Sorry, there were some problems"
+      @order.errors.each do |e|
+        logger.debug "Error: #{e}"
+      end
+      logger.debug "Order section count: #{@order.sections.count}"
       render(:action => :new)
     end
   end
