@@ -71,7 +71,7 @@ class EmployeesController < ApplicationController
     flash[:notice] << "Employee #{@employee} has been removed"
     redirect_to company_employees_path( @company )
   end
-  
+
   protected
 
   def require_login
@@ -99,3 +99,4 @@ class EmployeesController < ApplicationController
     flash[:warnings] = "Sorry, you don't have permission to do that." and redirect_to :back unless current_user.has_permission_to "destroy_employee"
   end
 end
+
