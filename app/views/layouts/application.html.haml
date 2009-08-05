@@ -20,7 +20,7 @@
 
   %body
     #user_nav
-      -if not current_user.logged_in?
+      -if not current_user
         =link_to "Register", new_user_path
         |
         =link_to "Login", login_path
@@ -36,11 +36,12 @@
         =link_to "PaperStocks", paper_stocks_path
         |
         =link_to "My profile", edit_user_path(:current)
-        - if current_user.has_permission_to? "modify_company"
+        -#if current_user.has_permission_to? "modify_company"
           |
-          =link_to "Manage Company", edit_company_path( current_company )
+          =#link_to "Manage Company", edit_company_path( current_company )
         |
         =link_to "Logout", logout_path
+
     %p{:style=>"color: green"}
       = flash[:notice]
     %p{:style=>"color:pink"}

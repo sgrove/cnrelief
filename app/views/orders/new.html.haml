@@ -90,10 +90,6 @@
               %br
               =f.text_field :quantity_ordered, :size=>"10"
             .span-4
-              =label :order, :quantity_overs, "Quantity overs"
-              %br
-              =#f.text_field :quantity_overs, :size=>"10"
-            .span-4
               =label :order, :overs_on_shelf, "Overs on shelf"
               %br
               =f.text_field :overs_on_shelf, :size=>"10"
@@ -109,7 +105,7 @@
             %a{:id=>"newQty", :class=>"ui-state-default selectstuff"}
               Add New Quantity
             -f.fields_for :quantities do |nf|
-              =#render :partial => 'quantity', :locals => { :f => nf }
+              =render :partial => 'quantity', :locals => { :f => nf }
 
 
       #tabs-3
@@ -119,3 +115,7 @@
               Add New Section
             -f.fields_for :sections do |nf|
               =render :partial => 'section', :locals => { :f => nf }
+    #form-para
+      .span-18
+        %p{:align=>"center"}
+          =f.submit('Create Order')
