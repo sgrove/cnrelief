@@ -31,10 +31,6 @@
     padding-top: 5px;
 }
 
-#para{
-    border-bottom: 1px solid #cccccc;
-}
-
 h4{
     text-align: center;
     color: #999999;
@@ -44,5 +40,9 @@ h4{
 .fieldname{
     color: #666666;
     font-weight: bold;
+}
+
+#para{
+    border-bottom: 1px solid #cccccc;
 }
 
