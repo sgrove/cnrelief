@@ -1,0 +1,35 @@
+#!/bin/sh
+CURDIR=`dirname $0`;
+ROOTDIR="$CURDIR/../../.."
+
+echo "Current directory is..."
+echo $CURDIR
+echo "Root directory is..."
+echo $ROOTDIR
+
+# Set GWT_HOME manuall
+GWT_HOME='/Applications/eclipse/plugins/com.google.gwt.eclipse.sdkbundle.macosx_1.7.0.v200907291526/gwt-mac-1.7.0'
+
+# Determine our OS specific gwt jar file
+OS_TYPE=`uname`
+if [ $OS_TYPE = 'Linux' ]
+then
+    GWT_FLAGS=''
+    GWT_OS_JAR='gwt-dev-linux.jar'
+else
+    GWT_FLAGS='-XstartOnFirstThread'
+    GWT_OS_JAR='gwt-dev-mac.jar'
+fi
+
+# Defaults to running at localhost:3000
+GWT_PORT=3000
+
+# Specify our classpaths and included jars
+SRCDIR="$CURDIR/src/presssetupdashboard"
+REQUIRED_LIBS="$CURDIR/src:$CURDIR/bin:$GWT_HOME/gwt-user.jar:$GWT_HOME/$GWT_OS_JAR"
+VENDOR_LIBS="$CURDIR/lib/gwt-rest.jar:$CURDIR/lib/gwtx.jar" # append additional entries here
+
+# Run the GWT Compiler
+echo java $GWT_FLAGS -Xmx256M -classpath "$REQUIRED_LIBS:$SRCDIR:$VENDOR_LIBS" com.google.gwt.dev.HostedMode -war "$ROOTDIR/public/gwt" -gen "$ROOTDIR/public/gwt" "$@" -noserver -startupUrl press_setup_dashboard -style PRETTY -logLevel ALL -port $GWT_PORT PressSetupDashboard;
+
+java $GWT_FLAGS -Xmx256M -classpath "$REQUIRED_LIBS:$SRCDIR:$VENDOR_LIBS" com.google.gwt.dev.HostedMode -war "$ROOTDIR/public/gwt" -gen "$ROOTDIR/public/gwt" "$@" -noserver -startupUrl press_setup_dashboard -style PRETTY -logLevel ALL -port $GWT_PORT presssetupdashboard.PressSetupDashboard;
