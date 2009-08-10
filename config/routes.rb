@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.press_setup_dashboard '/press_setup_dashboard', :controller => 'press_setup_dashboard', :action => 'index'
+
+  map.press_setup_dashboard '/press_setup_dashboard', :controller => 'press_setup_dashboard', :action => 'index'
+
   map.resource :account, :controller => 'users'
   map.resources :users
   map.resources :password_resets

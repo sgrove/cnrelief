@@ -10,6 +10,8 @@ class Bindery < ActiveRecord::Base
     ups = options[:ups]
     charges = options[:charges]
 
+    return 0 if charges.nil?
+
     sum = 0.0
 
     charges.each do |category, pairs|

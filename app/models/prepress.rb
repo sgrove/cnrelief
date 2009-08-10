@@ -12,6 +12,8 @@ class Prepress < ActiveRecord::Base
 
     charges = options[:charges]
 
+    return 0 if charges.nil?
+    
     charges.each do |index, value|
       cost = cost_set.costs.prepress_costs( self.id ).named( index.to_s ).first
       puts "Cost #{index} not found!" if cost.nil?

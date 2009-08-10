@@ -55,7 +55,8 @@ class Section < ActiveRecord::Base
 
   # Used to suggest number of ups on a given page
   def calculate_ups
-    optimize_paper(self.press_size, self.finish_flat_size)[:outs]
+    optimize_paper(self.press_size,
+                   self.finish_flat_size)[:outs]
   end
 
   def calculate_stock_price(markup = self.stock_sell_percent)
@@ -106,7 +107,10 @@ class Section < ActiveRecord::Base
   end
 
   def prepress_cost(options={})
-    prepress.cost(:cost_set => cost_set, :charges => prepress_list, :debug => @debug)
+    p = prepress
+    p.cost(:cost_set => cost_set,
+           :charges => prepress_list,
+           :debug => @debug)
   end
 
   def paper_cost(options={})
@@ -128,7 +132,12 @@ class Section < ActiveRecord::Base
 
   def bindery_cost(options={})
     puts "About to calculate bindery costs...(#{bindery_list})" if @debug
-    bindery_machine.cost(:cost_set => cost_set, :ups => calculate_ups, :quantity => options[:quantity], :quantity_required => options[:quantity_allowed], :charges => bindery_list, :debug => @debug)
+    bindery_machine.cost(:cost_set => cost_set,
+                         :ups => calculate_ups,
+                         :quantity => options[:quantity],
+                         :quantity_required => options[:quantity_allowed],
+                         :charges => bindery_list,
+                         :debug => @debug)
   end
 
   def coverage
@@ -180,6 +189,13 @@ class Section < ActiveRecord::Base
 
   # Dummy method for now
   def prepress
-    self.order.job.client.company.prepress
+    order.job.client.company.prepress
+  end
+
+  def save
+    #hack hack hack
+    self.bindery_machine = Bindery.first
+    self.letterpress_machine = Letterpress.first
+    super
   end
 end
