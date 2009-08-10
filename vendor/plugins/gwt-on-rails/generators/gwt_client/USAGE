@@ -1,0 +1,15 @@
+./script/generate gwt_client GwtClientName
+
+Example: script/generate gwt_client Dashboard
+
+This will generate a GWT client with a module name of dashboard.Dashboard
+(following the Java/GWT conventions for packaging). Compiled code
+is placed under public/gwt/dashboard.Dashboard. Source is under
+/app/gwt/dashboard.
+
+Generated rake tasks include:
+
+- dashboard:compile
+- dashboard:hosted
+- dashboard:clean
+
