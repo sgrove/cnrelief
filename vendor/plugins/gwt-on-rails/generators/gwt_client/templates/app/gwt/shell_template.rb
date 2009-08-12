@@ -14,14 +14,15 @@ else
 fi
 
 # Defaults to running at localhost:3000
-if [ $GWT_PORT = '' ]
-then
-    GWT_PORT=3000
-fi
+[ "$GWT_PORT" ] || GWT_PORT=3000
+
+# gwt-rest Resources. Add paths to each resource you want to be available in your app (NOTE: You must also create the correpsonding gwt.xml files. See notes for more information.)
+# Example: For a Press mode, add: RESOURCE_DIR="$RESOURCE_DIR:$CURDIR/../press/src/press"
+RESOURCE_DIR="$RESOURCE_DIR:$CURDIR/../press/src/press"
 
 # Specify our classpaths and included jars
 SRCDIR="$CURDIR/src/<%= file_name.downcase.gsub('_', '') %>"
-REQUIRED_LIBS="$CURDIR/src:$CURDIR/bin:$GWT_HOME/gwt-user.jar:$GWT_HOME/$GWT_OS_JAR"
+REQUIRED_LIBS="$CURDIR/src:$CURDIR/bin:$GWT_HOME/gwt-user.jar:$GWT_HOME/$GWT_OS_JAR:$RESOURCE_DIR"
 VENDOR_LIBS="$CURDIR/lib/gwt-rest.jar:$CURDIR/lib/gwtx.jar" # append additional entries here
 
 # Run the GWT Compiler

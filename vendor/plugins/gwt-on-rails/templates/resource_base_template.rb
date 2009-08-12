@@ -5,6 +5,7 @@ import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.json.client.JSONNumber;
+import com.google.gwt.core.client.GWT;
 <%- if properties.values.detect { |n| n == 'Date' || n == 'DateOnly' } -%>
 import com.google.gwt.i18n.client.DateTimeFormat;
 import java.util.Date;
@@ -36,9 +37,10 @@ public class <%= gwt_resource_name %>Base implements Resource {
 <%- end -%>
     
     public <%= gwt_resource_name %>Base() {}
-    
-    public void populateFromRepresentation(String representation) {
-        JSONObject json = (JSONObject) JSONParser.parse(representation);
+
+    public void populateFromJSONRepresentation(JSONObject json) {
+        GWT.log("Populating from representation...", null);
+
         Iterator i;
         
         for (i = json.keySet().iterator(); i.hasNext();) {
@@ -50,17 +52,18 @@ public class <%= gwt_resource_name %>Base implements Resource {
             if<%- first = false
       else -%>
  else if<%- end -%> ("<%= k.underscore %>".equals(key)) {
+                GWT.log(<%= "\"Parsing \\\"#{k.underscore}\\\":\"" %> + json.get(key), null);
      <%- if properties[k] == 'int' -%>
                 JSONNumber js = json.get(key).isNumber();
                 if (js != null) {
-                    this.<%= k %> = new Double(json.get(key).isNumber().getValue()).intValue();
+                    this.<%= k %> = new Double(json.get(key).isNumber().doubleValue()).intValue();
                 } else {
                     this.<%= k %> = 0;
                 }
      <%- elsif properties[k] == 'boolean' -%>
                 JSONNumber js = json.get(key).isNumber();
                 if (js != null) {
-                    int boolNumber = new Double(json.get(key).isNumber().getValue()).intValue();
+                    int boolNumber = new Double(json.get(key).isNumber().doubleValue()).intValue();
                     if(boolNumber == 1)
                         this.<%= k %> = true;
                     else {
@@ -72,19 +75,19 @@ public class <%= gwt_resource_name %>Base implements Resource {
      <%- elsif properties[k] == 'double' -%>
                 JSONNumber js = json.get(key).isNumber();
                 if (js != null) {
-                    this.<%= k %> = json.get(key).isNumber().getValue();
+                    this.<%= k %> = json.get(key).isNumber().doubleValue();
                 } else {
                     this.<%= k %> = 0;
                 }
      <%- elsif properties[k] == 'DateOnly' -%>
                 JSONString js = json.get(key).isString();
                 if (js != null) {
-                    this.<%= k %> = dateOnlyFormat.parse(js.stringValue());
+                    //this.<%= k %> = dateOnlyFormat.parse(js.stringValue());
                 }
      <%- elsif properties[k] == 'Date' -%>
                JSONString js = json.get(key).isString();
                if (js != null) {
-                   this.<%= k %> = dateTimeFormat.parse(js.stringValue());
+                   //this.<%= k %> = dateTimeFormat.parse(js.stringValue());
                }
      <%- else -%>
                 JSONString js = json.get(key).isString();
@@ -95,8 +98,19 @@ public class <%= gwt_resource_name %>Base implements Resource {
                 }
      <%- end -%>
             }<%- end -%>
-            
+          }
+
+          GWT.log("Finished creating from representation!", null);            
         }
+    
+    public void populateFromStringRepresentation(String representation) {
+        JSONObject json = (JSONObject) JSONParser.parse(representation);
+        populateFromJSONRepresentation(json);
+    }
+
+    public void populateFromRepresentation(String representation) {
+        JSONObject json = (JSONObject) JSONParser.parse(representation);
+        populateFromJSONRepresentation(json);
     }
     
     public String toRepresentation() {

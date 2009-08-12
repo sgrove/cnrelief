@@ -1,3 +1,7 @@
 package press.client.resource;
 
-public class Press extends PressBase {}
+import com.google.gwt.core.client.GWT;
+
+public class Press extends PressBase {
+
+}

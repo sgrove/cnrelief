@@ -3,10 +3,19 @@ class PressesController < ApplicationController
 
   def index
     @presses = current_user.company.presses
+
+    respond_to do |format|
+      format.html
+      format.js  { render :json => @presses }
+    end
   end
 
   def show
     @press = current_user.company.presses.find(params[:id])
+
+    respond_to do |format|
+      format.js  { render :json => @press }
+    end
   end
 
   def new

@@ -8,16 +8,7 @@ class CreatePresses < ActiveRecord::Migration
       t.integer :washup_additional_minutes
       t.integer :plate_initial_minutes
       t.integer :plate_additional_minutes
-      t.integer :die_cut_minutes
-      t.integer :kiss_cut_minutes
-      t.integer :foil_minutes
-      t.integer :emboss_minutes
-      t.integer :normal_run_rate
-      t.integer :minimum_run_rate
-      t.integer :make_ready_sheets
       t.text :run_rates # Hash
-      t.float :presses, :discount_percentage
-      t.float :presses, :discount_hours
 
       t.timestamps
     end

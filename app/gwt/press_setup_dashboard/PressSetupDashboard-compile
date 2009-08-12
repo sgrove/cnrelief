@@ -1,6 +1,14 @@
 #!/bin/sh
 CURDIR=`dirname $0`;
-ROOTDIR="$CURDIR/../../../"
+ROOTDIR="$CURDIR/../../.."
+
+echo "Current directory is..."
+echo $CURDIR
+echo "Root directory is..."
+echo $ROOTDIR
+
+# Set GWT_HOME manuall
+GWT_HOME='/Applications/eclipse/plugins/com.google.gwt.eclipse.sdkbundle.macosx_1.7.0.v200907291526/gwt-mac-1.7.0'
 
 # Determine our OS specific gwt jar file
 OS_TYPE=`uname`
@@ -13,9 +21,23 @@ else
     GWT_OS_JAR='gwt-dev-mac.jar'
 fi
 
+
+
+
 # Specify our classpaths and included jars
+# SRCDIR="$CURDIR/../press/src"
 REQUIRED_LIBS="$CURDIR/src:$CURDIR/bin:$GWT_HOME/gwt-user.jar:$GWT_HOME/$GWT_OS_JAR"
 VENDOR_LIBS="$CURDIR/lib/gwt-rest.jar:$CURDIR/lib/gwtx.jar" # append additional entries here
 
+echo "SourceDir: "$SRCDIR
+echo "ReqLibDir: "$REQUIRED_LIBS
+echo "VendorDir: "$VENDOR_LIBS
+
+# gwt-rest Resources
+PRESS_MODEL="/Users/seangrove/code/rails/printworks/app/gwt/press/src/"
+
+# Echo output
+echo javac $GWT_FLAGS -Xmx512M -sourcepath "$PRESS_MODEL" -classpath "$SRCDIR:$REQUIRED_LIBS:$VENDOR_LIBS" com.google.gwt.dev.Compiler -war "$ROOTDIR/public/gwt" -gen "$ROOTDIR/public/gwt" "$@" presssetupdashboard.PressSetupDashboard;
+
 # Run the GWT Compiler
-java $GWT_FLAGS -Xmx256M -classpath "$REQUIRED_LIBS:$VENDOR_LIBS" com.google.gwt.dev.Compiler -war "$ROOTDIR/public/gwt" -gen "$ROOTDIR/public/gwt" "$@" presssetupdashboard.PressSetupDashboard;
+javac $GWT_FLAGS -Xmx512M -sourcepath "$PRESS_MODEL" -classpath "$SRCDIR:$REQUIRED_LIBS:$VENDOR_LIBS" com.google.gwt.dev.Compiler -war "$ROOTDIR/public/gwt" -gen "$ROOTDIR/public/gwt" "$@" presssetupdashboard.PressSetupDashboard;

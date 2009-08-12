@@ -14,10 +14,7 @@
   <inherits name='com.google.gwt.http.HTTP'/>
   <inherits name='com.google.gwt.json.JSON'/>
   <inherits name='com.kaboomerang.gwt.rest.REST'/>
-
-  <!-- Put Custom Libraries Below -->
-  <inherits name='press.client.resource.PressClient' />
-
-  <!-- Specify the app entry point class.  -->
-  <entry-point class='presssetupdashboard.client.PressSetupDashboard'/> 
+  
+  <!-- Source files  -->
+  <source path="" includes="*.java"/>
 </module>
