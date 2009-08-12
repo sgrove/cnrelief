@@ -37,3 +37,6 @@
 [submodule "vendor/plugins/rspec-rails"]
 	path = vendor/plugins/rspec-rails
 	url = git://github.com/dchelimsky/rspec-rails.git
+[submodule "vendor/plugins/gwt-on-rails"]
+	path = vendor/plugins/gwt-on-rails
+	url = git@github.com:sgrove/gwt-on-rails.git

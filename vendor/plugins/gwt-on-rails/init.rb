@@ -1,1 +1,0 @@
-require 'gwt_on_rails'
