@@ -1,5 +1,5 @@
 class PressesController < ApplicationController
-  before_filter :require_login
+  # before_filter :require_login
 
   def index
     @presses = current_user.company.presses
@@ -23,13 +23,19 @@ class PressesController < ApplicationController
   end
 
   def create
-    @press = current_user.company.presses.build(params[:press])
-
-    if @press.save
-      flash[:notice] = "We've added the press to your company's resources."
-      redirect_to company_press_path(current_user.company, @press)
-    else
-      render(:action => :new)
+    @press = current_user.company.presses.build(params)
+ 
+    respond_to do |format|
+      if @press.save
+        flash[:notice] = "We've added the press to your company's resources."
+      format.html { redirect_to company_press_path(current_user.company, @press) }
+        format.xml  { render :xml => @press, :status => :created, :location => @press }
+        format.json { render :json => @press, :status => :created, :location => @press }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @press.errors, :status => :unprocessable_entity }
+        format.json { render :json => @press.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
@@ -38,9 +44,11 @@ class PressesController < ApplicationController
   end
 
   def update
-    @press = current_user.company.presses.build(params[:press])
+    logger.debug "Entering into the update method..."
+    @press = current_user.company.presses.find(params[:id])
+    @press.update_attributes(params[:press])
 
-    if @press.save
+    if true #@press.save
       flash[:notice] = "We've updated your company's press information."
       redirect_to company_press_path(current_user.company, @press)
     else
@@ -49,6 +57,8 @@ class PressesController < ApplicationController
   end
 
   def destroy
+    logger.debug "Entering into the destroy method..."
+    
     @press = current_user.company.presses
 
     if @press.destroy

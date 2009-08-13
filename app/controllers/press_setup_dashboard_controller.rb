@@ -1,5 +1,5 @@
 class PressSetupDashboardController < ApplicationController
-  layout false
+  layout 'gwt'
 
   def index
   end

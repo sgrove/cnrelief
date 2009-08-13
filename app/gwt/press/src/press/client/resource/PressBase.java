@@ -44,6 +44,8 @@ public class PressBase implements Resource {
 
         Iterator i;
         
+        json = (JSONObject) json.get("press");
+        
         for (i = json.keySet().iterator(); i.hasNext();) {
             String key = (String) i.next();
             
@@ -147,34 +149,35 @@ public class PressBase implements Resource {
     }
     
     public String toRepresentation() {
-        return "{" +
-            "\"name\": " +
-            new JSONString(name).toString() +
-            ", " +
-            "\"size\": " +
+    	GWT.log("Populating from representation...", null);
+        String jsonData = "\"name\":" +
+            new JSONString(name).toString() + ",";
+        jsonData += "\"size\":" +
             new JSONString(size).toString() +
-            ", " +
-            "\"company_id\": " +
+            ","; 
+        jsonData += "\"company_id\":" +
             companyId +
-            ", " +
-            "\"washup_initial_minutes\": " +
+            ","; 
+        jsonData +="\"washup_initial_minutes\":" +
             washupInitialMinutes +
-            ", " +
-            "\"plate_additional_minutes\": " +
+            ","; 
+        jsonData +="\"plate_additional_minutes\":" +
             plateAdditionalMinutes +
-            ", " +
-            "\"id\": " +
+            ","; 
+        jsonData +="\"id\":" +
             id +
-            ", " +
-            "\"plate_initial_minutes\": " +
+            ","; 
+        jsonData +="\"plate_initial_minutes\":" +
             plateInitialMinutes +
-            ", " +
-            "\"washup_additional_minutes\": " +
+            ","; 
+        jsonData +="\"washup_additional_minutes\":" +
             washupAdditionalMinutes +
-            ", " +
-            "\"run_rates\": " +
-            new JSONString(runRates).toString() +
-            "}";
+            ","; 
+        jsonData +="\"run_rates\":{\"light\":9500,\"medium\":7000,\"medium_heavy\":6000,\"heavy\":5000}";
+            //new JSONString(runRates).toString();
+        GWT.log("Finished converting to json representation...(" + jsonData + ")", null);
+        
+        return jsonData;
     }
     
     // Accessors

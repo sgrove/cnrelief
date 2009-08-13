@@ -3,6 +3,12 @@ class Press < ActiveRecord::Base
   belongs_to :company
   has_many :costs, :as => :costable
 
+  default_scope :order => "created_at ASC"
+
+  def to_s
+    name
+  end
+
   def cost(options={}) # cost_set_id, section_id, order_quantity
     runtime = self.calculate_runtime(options)
 

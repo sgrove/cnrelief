@@ -1,0 +1,58 @@
+!!!
+%html
+  %head
+    %meta{:"http-equiv"=>"content-type", :content=>"text/html;charset=UTF-8"}
+    %title Codename: Relief
+    = stylesheet_link_tag 'scaffold'
+    = stylesheet_link_tag 'blueprint/screen'
+    = stylesheet_link_tag 'jquery-ui'
+    = stylesheet_link_tag 'site'
+    /[if IE]
+      = stylesheet_link_tag 'blueprint/ie'
+
+    = javascript_include_tag '/gwt/presssetupdashboard.PressSetupDashboard/presssetupdashboard.PressSetupDashboard.nocache.js'
+    = javascript_include_tag 'jquery'
+    = javascript_include_tag 'jquery-ui'
+    = javascript_include_tag 'application'
+
+    -javascript_tag do
+      = yield(:jstemplates)
+    = yield(:header) if @content_for_header
+
+  %body
+    #user_nav
+      -if not current_user
+        =link_to "Register", new_user_path
+        |
+        =link_to "Login", login_path
+      -else
+        =link_to "Dashboard", dashboard_path
+        |
+        =link_to "Presses", presses_path
+        |
+        =link_to "Clients", company_clients_path( current_user.company )
+        |
+        =link_to "Orders", new_order_path
+        |
+        =link_to "PaperStocks", paper_stocks_path
+        |
+        =link_to "My profile", edit_user_path(:current)
+        -#if current_user.has_permission_to? "modify_company"
+          |
+          =#link_to "Manage Company", edit_company_path( current_company )
+        |
+        =link_to "Logout", logout_path
+        |
+        ="(#{current_user.email})"
+        
+
+    %p{:style=>"color: green"}
+      = flash[:notice]
+    %p{:style=>"color:pink"}
+      = flash[:warning]
+
+    .container
+      %div{:class=>"span-24", :id=>"page_content"}
+        =yield
+      %div{:class=>"span-24", :id=>"footer"}
+        this is the footer
