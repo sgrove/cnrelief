@@ -132,6 +132,14 @@ function presssetupdashboard_PressSetupDashboard(){
     }
   }
 
+  function unflattenKeylistIntoAnswers(propValArray, value){
+    var answer = answers;
+    for (var i = 0, n = propValArray.length - 1; i < n; ++i) {
+      answer = answer[propValArray[i]] || (answer[propValArray[i]] = []);
+    }
+    answer[propValArray[n]] = value;
+  }
+
   function computePropValue(propName){
     var value = providers[propName](), allowedValuesMap = values[propName];
     if (value in allowedValuesMap) {
@@ -226,8 +234,13 @@ function presssetupdashboard_PressSetupDashboard(){
   $stats && $stats({moduleName:'presssetupdashboard.PressSetupDashboard', subSystem:'startup', evtGroup:'bootstrap', millis:(new Date()).getTime(), type:'selectingPermutation'});
   if (!strongName) {
     try {
-      alert("GWT module 'presssetupdashboard.PressSetupDashboard' needs to be (re)compiled, please run a compile or use the Compile/Browse button in hosted mode");
-      return;
+      unflattenKeylistIntoAnswers(['ie6'], 'DC22E1908EC176669A48186F8E17C962.cache.html');
+      unflattenKeylistIntoAnswers(['ie8'], 'C25E684206AC5B3BC1400E134AD78CF5.cache.html');
+      unflattenKeylistIntoAnswers(['gecko1_8'], 'BC35B64C0E0307ED15F6DB366A7F9652.cache.html');
+      unflattenKeylistIntoAnswers(['opera'], '8F25843E090C056A94CB884DE9A2D99E.cache.html');
+      unflattenKeylistIntoAnswers(['safari'], '0E09F95ABDD5EC6A9710F73DBDB5ACEC.cache.html');
+      unflattenKeylistIntoAnswers(['gecko'], '8B64453DB5F8FE7E3907D6CA3FC7CA81.cache.html');
+      strongName = answers[computePropValue('user.agent')];
     }
      catch (e) {
       return;

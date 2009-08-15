@@ -8,7 +8,12 @@ echo "Root directory is..."
 echo $ROOTDIR
 
 # Set GWT_HOME manually
-GWT_HOME='/Applications/eclipse/plugins/com.google.gwt.eclipse.sdkbundle.macosx_1.7.0.v200907291526/gwt-mac-1.7.0'
+
+#sean's dir
+#GWT_HOME='/Applications/eclipse/plugins/com.google.gwt.eclipse.sdkbundle.macosx_1.7.0.v200907291526/gwt-mac-1.7.0'
+
+#akash's dir
+GWT_HOME='/media/e/devstuff/eclipse/plugins/com.google.gwt.eclipse.sdkbundle.linux_1.7.0.v200907291526/gwt-linux-1.7.0'
 
 # Determine our OS specific gwt jar file
 OS_TYPE=`uname`
@@ -39,5 +44,4 @@ echo "Required Libs: $REQUIRED_LIBS"
 echo java $GWT_FLAGS -Xmx512M -classpath "$REQUIRED_LIBS:$VENDOR_LIBS:$PRESS_MODEL" com.google.gwt.dev.HostedMode -war "$ROOTDIR/public/gwt" -gen "$ROOTDIR/public/gwt" "$@" -noserver -startupUrl press_setup_dashboard -style PRETTY -logLevel ALL -port $GWT_PORT presssetupdashboard.PressSetupDashboard;
 
 java $GWT_FLAGS -Xmx512M -classpath "$REQUIRED_LIBS:$VENDOR_LIBS:$PRESS_MODEL" com.google.gwt.dev.HostedMode -war "$ROOTDIR/public/gwt" -gen "$ROOTDIR/public/gwt" "$@" -noserver -startupUrl press_setup_dashboard -style PRETTY -logLevel ALL -port $GWT_PORT presssetupdashboard.PressSetupDashboard;
-
 
