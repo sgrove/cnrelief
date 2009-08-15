@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.DecoratedPopupPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -57,12 +58,14 @@ public class PressSetupDashboard implements EntryPoint {
 	// Panel + Table Elements
 	private HorizontalPanel headerPanel = new HorizontalPanel();
 	private HorizontalPanel pressPanel = new HorizontalPanel();
-	private HorizontalPanel pressDetailsPanel = new HorizontalPanel();
+	private VerticalPanel pressDetailsPanel = new VerticalPanel();
 
 	private VerticalPanel mainPanel = new VerticalPanel();
-	private VerticalPanel runRatesPanel = new VerticalPanel();
-	private VerticalPanel washupTimesPanel = new VerticalPanel();
-	private VerticalPanel plateTimesPanel = new VerticalPanel();
+	private HorizontalPanel runRatesPanel = new HorizontalPanel();
+	private HorizontalPanel washupTimesPanel = new HorizontalPanel();
+	private HorizontalPanel plateTimesPanel = new HorizontalPanel();
+	private VerticalPanel washup_and_plate_Panel = new VerticalPanel();
+	private HorizontalPanel washup_plates_costs = new HorizontalPanel();
 	private VerticalPanel chargesPanel = new VerticalPanel();
 	
 
@@ -85,7 +88,6 @@ public class PressSetupDashboard implements EntryPoint {
 	private final Label initialPlateLabel = new Label("Initial:");
 	private final Label additionalPlateLabel = new Label("Additional:");
 	private final Label chargesLabel = new Label("Hourly Press Charge");
-	//private final Label Label = new Label("");
 	
 	// All inputs to modify a given press
 	private TextBox pressNameField = new TextBox();
@@ -114,10 +116,13 @@ public class PressSetupDashboard implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-
-
+		
 		formHeaderLabel.setText("Managing Presses");
-
+		
+		//should work but pops up errors. stupid alignments
+		//i copied this from the gwt docs. but still...
+		//runRatesPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_BOTTOM);
+		
 		mainPanel.add(headerPanel);
 		mainPanel.add(pressPanel);
 		mainPanel.add(pressDetailsPanel);
@@ -134,38 +139,95 @@ public class PressSetupDashboard implements EntryPoint {
 		pressPanel.add(pressSizeField);
 		pressPanel.add(submitButton);
 		
+		washup_and_plate_Panel.add(washupTimesPanel);
+		washup_and_plate_Panel.add(plateTimesPanel);
+		
 		// Setup pressDetailsPanel
 		pressDetailsPanel.add(runRatesPanel);
-		pressDetailsPanel.add(washupTimesPanel);
-		pressDetailsPanel.add(plateTimesPanel);
-		pressDetailsPanel.add(chargesPanel);
+			
+		//pressDetailsPanel.add(washupTimesPanel);
+		//pressDetailsPanel.add(plateTimesPanel);
+		washup_plates_costs.add(washup_and_plate_Panel);
+		washup_plates_costs.add(chargesPanel);
+		
+		pressDetailsPanel.add(washup_plates_costs);
+		
+		//pressDetailsPanel.add(chargesPanel);
+		
+		//set sizes of all numeric fields
+		lightRunRateField.setVisibleLength(4);
+		mediumRunRateField.setVisibleLength(4);
+		mediumHeavyRunRateField.setVisibleLength(4);
+		heavyRunRateField.setVisibleLength(4);
+		initialWashupField.setVisibleLength(4);
+		additionalWashupField.setVisibleLength(4);
+		initialPlateField.setVisibleLength(4);
+		additionalPlateField.setVisibleLength(4);
 		
 		// Setup runRatesPanel
 		runRatesPanel.add(runRateLabel);
-		runRatesPanel.add(lightLabel);
-		runRatesPanel.add(lightRunRateField);
-		runRatesPanel.add(mediumLabel);
-		runRatesPanel.add(mediumRunRateField);
-		runRatesPanel.add(mediumHeavyLabel);
-		runRatesPanel.add(mediumHeavyRunRateField);
-		runRatesPanel.add(heavyLabel);
-		runRatesPanel.add(heavyRunRateField);
+		runRatesPanel.setCellWidth(runRateLabel, "75px");
+		runRateLabel.getElement().setId("boldlabel");
 		
+		runRatesPanel.add(lightLabel);
+		runRatesPanel.setCellWidth(lightLabel, "76px");
+		runRatesPanel.add(lightRunRateField);
+		runRatesPanel.setCellWidth(lightRunRateField, "50px");
+
+		runRatesPanel.add(mediumLabel);
+		runRatesPanel.setCellWidth(mediumLabel, "84px");
+		runRatesPanel.add(mediumRunRateField);
+		runRatesPanel.setCellWidth(mediumRunRateField, "50px");
+		
+		runRatesPanel.add(mediumHeavyLabel);
+		runRatesPanel.setCellWidth(mediumHeavyLabel, "110px");
+		runRatesPanel.add(mediumHeavyRunRateField);
+		runRatesPanel.setCellWidth(mediumHeavyRunRateField, "50px");
+
+		runRatesPanel.add(heavyLabel);
+		runRatesPanel.setCellWidth(heavyLabel, "90px");
+		runRatesPanel.add(heavyRunRateField);
+		runRatesPanel.setCellWidth(heavyRunRateField, "50px");
+		
+				
 		// Setup washupTimesPanel
+		washupTimeLabel.getElement().setId("boldlabel");
+		
 		washupTimesPanel.add(washupTimeLabel);
+		washupTimesPanel.setCellWidth(washupTimeLabel, "11%");
+		
 		washupTimesPanel.add(initialWashupLabel);
+		washupTimesPanel.setCellWidth(initialWashupLabel, "4%");
+		
 		washupTimesPanel.add(initialWashupField);
+		washupTimesPanel.setCellWidth(initialWashupField, "10%");
+		
 		washupTimesPanel.add(additionalWashupLabel);
+		washupTimesPanel.setCellWidth(additionalWashupLabel, "5%");
+		
 		washupTimesPanel.add(additionalWashupField);
+		washupTimesPanel.setCellWidth(additionalWashupField, "5%");
 		
 		// Setup plateTimesPanel
-		plateTimesPanel.add(plateTimeLabel);
-		plateTimesPanel.add(initialPlateLabel);
-		plateTimesPanel.add(initialPlateField);
-		plateTimesPanel.add(additionalPlateLabel);
-		plateTimesPanel.add(additionalPlateField);
 		
+		plateTimeLabel.getElement().setId("boldlabel");
+		plateTimesPanel.add(plateTimeLabel);
+		plateTimesPanel.setCellWidth(plateTimeLabel, "11%");
+		
+		plateTimesPanel.add(initialPlateLabel);
+		plateTimesPanel.setCellWidth(initialPlateLabel, "4%");
+		
+		plateTimesPanel.add(initialPlateField);
+		plateTimesPanel.setCellWidth(initialPlateField, "10%");
+		
+		plateTimesPanel.add(additionalPlateLabel);
+		plateTimesPanel.setCellWidth(additionalPlateLabel, "5%");
+		
+		plateTimesPanel.add(additionalPlateField);
+		plateTimesPanel.setCellWidth(additionalPlateField, "5%");
+			
 		// Setup chargesPanel
+		chargesLabel.getElement().setId("boldlabel");
 		chargesPanel.add(chargesLabel);
 		chargesPanel.add(costTable);
 		
