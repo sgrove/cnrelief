@@ -1,4 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
+  map.order_dashboard '/order_dashboard', :controller => 'order_dashboard', :action => 'index'
+
+  map.cost_set_dashboard '/cost_set_dashboard', :controller => 'cost_set_dashboard', :action => 'index'
+
+  map.cost_set_dashboard '/cost_set_dashboard', :controller => 'cost_set_dashboard', :action => 'index'
+
+  map.cost_set_dashboard '/cost_set_dashboard', :controller => 'cost_set_dashboard', :action => 'index'
+
   map.press_setup_dashboard '/press_setup_dashboard', :controller => 'press_setup_dashboard', :action => 'index'
 
   map.press_setup_dashboard '/press_setup_dashboard', :controller => 'press_setup_dashboard', :action => 'index'

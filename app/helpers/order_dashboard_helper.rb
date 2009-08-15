@@ -1,0 +1,2 @@
+module OrderDashboardHelper
+end
