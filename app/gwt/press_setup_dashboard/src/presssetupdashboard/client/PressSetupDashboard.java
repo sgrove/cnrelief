@@ -43,8 +43,9 @@ public class PressSetupDashboard implements EntryPoint {
 	/** 
 	 * Internal variables
 	 */
-	private static final String PRESS_URL = "http://localhost:3000/presses/";
 	private static final String PRESSES_URL = "http://localhost:3000/presses.js";
+	private static final String NEW_PRESS_URL = "http://localhost:3000/presses";
+	private static final String PRESS_URL = "http://localhost:3000/presses/";
 
 	private ArrayList presses = new ArrayList();
 	private String url;	
@@ -70,19 +71,19 @@ public class PressSetupDashboard implements EntryPoint {
 	// All form labels
 	private final Label formHeaderLabel = new Label("Managing Presses");
 	private final Label statusLabel = new Label("Loading Application...");
-	private final Label pressNameLabel = new Label("Press Name");
-	private final Label pressSizeLabel = new Label("Press Size");
-	private final Label runRateLabel = new Label("Run Rates");
-	private final Label lightLabel = new Label("Light Ink Coverage");
-	private final Label mediumLabel = new Label("Medium Ink Coverage");
-	private final Label mediumHeavyLabel = new Label("Medium-Heavy Ink Coverage");
-	private final Label heavyLabel = new Label("Heavy Ink Coverage");	
-	private final Label washupTimeLabel = new Label("Washup Times");
-	private final Label initialWashupLabel = new Label("Initial");
-	private final Label additionalWashupLabel = new Label("Additional");
-	private final Label plateTimeLabel = new Label("Plate Times");
-	private final Label initialPlateLabel = new Label("Initial");
-	private final Label additionalPlateLabel = new Label("Additional");
+	private final Label pressNameLabel = new Label("Press Name:");
+	private final Label pressSizeLabel = new Label("Press Size:");
+	private final Label runRateLabel = new Label("Run Rates:");
+	private final Label lightLabel = new Label("Light Ink Coverage:");
+	private final Label mediumLabel = new Label("Medium Ink Coverage:");
+	private final Label mediumHeavyLabel = new Label("Medium-Heavy Ink Coverage:");
+	private final Label heavyLabel = new Label("Heavy Ink Coverage:");
+	private final Label washupTimeLabel = new Label("Washup Times:");
+	private final Label initialWashupLabel = new Label("Initial:");
+	private final Label additionalWashupLabel = new Label("Additional:");
+	private final Label plateTimeLabel = new Label("Plate Times:");
+	private final Label initialPlateLabel = new Label("Initial:");
+	private final Label additionalPlateLabel = new Label("Additional:");
 	private final Label chargesLabel = new Label("Hourly Press Charge");
 	//private final Label Label = new Label("");
 	
@@ -318,7 +319,6 @@ public class PressSetupDashboard implements EntryPoint {
 				if (press != null) {
 					
 					pressListBox.addItem(press.getName(), i.toString());
-					//pressListBox.addItem(press.getName(), (i++).toString()); // Just to play around, we do it 2x
 					presses.add(press);
 				} else {
 					throw new JSONException(); 
@@ -337,23 +337,27 @@ public class PressSetupDashboard implements EntryPoint {
 	}
 	
 	private void submitPressForm(Press press) {
-		GWT.log("Entered the submitPress method...", null);
+		GWT.log("Entered the submitPressForm method...", null);
 		String method = "post";
 
 		press = updatePressFromForm(press);
 		String jsonData;
+		String url;
+		
 		if (press.isNewRecord()) {
+			url = NEW_PRESS_URL; 
 			jsonData = press.toFullRepresentation();
 			GWT.log("New record. POSTing " + jsonData, null);
 		} else {
+			url = PRESS_URL + press.getId();
 			method = "put";
 			jsonData = press.toFullRepresentation();
 			GWT.log("New record. PUTing " + jsonData, null);
 		}
 		
-		RequestBuilder rb = new RequestBuilder(RequestBuilder.POST, URL.encode(PRESS_URL + press.getId()));
+		RequestBuilder rb = new RequestBuilder(RequestBuilder.POST, URL.encode(url));
 		rb.setHeader("Content-Type", "application/json");
-		rb.setHeader("X-HTTP-Method-Override", "put");
+		rb.setHeader("X-HTTP-Method-Override", method);
 
 		GWT.log("Posting press to " + PRESSES_URL, null);
 		GWT.log("Request: " + rb.toString() + ", Method: " + rb.getHTTPMethod() + ", Url: " + rb.getUrl(), null);
@@ -374,7 +378,7 @@ public class PressSetupDashboard implements EntryPoint {
 						statusLabel.setText("Press changes processed!");
 						retrievePresses();
 					} else {
-						GWT.log("Couldn't retrieve JSON - Server Problem: (" + response.getStatusText() + "-" + response.getStatusCode() + ") [at URL: " + url, null);
+						GWT.log("Couldn't retrieve JSON - Server Problem: (" + response.getStatusText() + "-" + response.getStatusCode() + ")", null);
 						statusLabel.setText("Error encountered, code 201.");
 					}
 				}       

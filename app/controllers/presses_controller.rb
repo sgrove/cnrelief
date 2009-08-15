@@ -23,7 +23,7 @@ class PressesController < ApplicationController
   end
 
   def create
-    @press = current_user.company.presses.build(params)
+    @press = current_user.company.presses.build(params[:press])
  
     respond_to do |format|
       if @press.save

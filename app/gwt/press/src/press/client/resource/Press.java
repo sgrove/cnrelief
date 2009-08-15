@@ -4,7 +4,7 @@ import com.google.gwt.core.client.GWT;
 
 public class Press extends PressBase {
 	public boolean isNewRecord() {
-		return ("" + this.getId() == "");
+		return (this.getId() == 0);
 	}
 	
 	/*
